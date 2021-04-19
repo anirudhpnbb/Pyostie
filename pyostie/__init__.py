@@ -1,8 +1,4 @@
-from pyostie.pdf_parser import *
-from pyostie.csv_parser import *
-from pyostie.txt_parser import *
-from pyostie.xls_parser import *
-from pyostie.xlsx_parser import *
+from pyostie.parsers import *
 
 
 class extract:
@@ -11,10 +7,8 @@ class extract:
         """
 
         :param filename:
-        :param input_file_ext:
-        :param method:
         :param tess_path:
-        :param encoding:
+        :param extension:
         """
         self.file = filename
         self.path = tess_path
@@ -23,7 +17,7 @@ class extract:
     def start(self):
         """
 
-        :return:
+        :return: Main function to start the process.
         """
         if self.ext.upper() == "PDF":
             if isinstance(self.file, str):
@@ -58,3 +52,18 @@ class extract:
                 excel = XLSParser(self.file)
                 output = excel.extract_xls()
                 return output
+        elif self.ext.upper() == "DOCX":
+            if isinstance(self.file, str):
+                docx = DOCXParser(self.file)
+                output = docx.extract_docx()
+                return output
+        elif self.ext.upper() == "DOC":
+            print("hey1")
+            if isinstance(self.file, str):
+                print("hey2")
+                try:
+                    doc = DOCParser(self.file)
+                    output = doc.extract_doc()
+                    return output
+                except Exception as ex:
+                    raise ex
