@@ -137,10 +137,15 @@ class ImageParser:
         :return:
         """
         out_list = []
-        pytesseract.pytesseract.tesseract_cmd = self.path
-        img = Image.open(self.file)
-        text = pytesseract.image_to_string(img)
-        out_list.append(text)
+        if self.path is not None:
+            pytesseract.pytesseract.tesseract_cmd = self.path
+            img = Image.open(self.file)
+            text = pytesseract.image_to_string(img)
+            out_list.append(text)
+        else:
+            img = Image.open(self.file)
+            text = pytesseract.image_to_string(img)
+            out_list.append(text)
         return out_list
 
 
