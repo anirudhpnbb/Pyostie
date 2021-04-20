@@ -78,9 +78,9 @@ text = output.start()
 output = pyostie.extract(filename, extension="xlsx")
 text = output.start() 
 
-or
+# For word files
 
-output = pyostie.extract(filename, extension="xls")
+output = pyostie.extract(filename, extension="docx")
 text = output.start()
 
 
@@ -89,7 +89,7 @@ text = output.start()
 ## Future Work
 
 
-In this version we are only able to extract text from PDFs, Excel, TXT and CSV formats only. Soon, we will be adding doc, docx, ppt, pptx, jpg, tif, png and many more. Watch this space for more updates.
+In this version we are only able to extract text from PDFs, Excel, TXT and CSV formats only. Soon, we will be adding doc, ppt, pptx and many more. Watch this space for more updates.
 
 <!-- CONTACT -->
 ## Contact
