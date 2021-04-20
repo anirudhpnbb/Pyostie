@@ -66,7 +66,6 @@ df, text = output.start()
 output = pyostie.extract(filename, insights=False, extension="jpg")
 df = output.start()
 
-
 # For PDF files:
 
 output = pyostie.extract(filename, extension="pdf")
