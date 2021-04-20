@@ -26,7 +26,8 @@ PYOSTIE is short for Python Open Source Text Information Extractor.
 
 A very elegant and simple library to extract text from many file formats.
 
-This  module can extract text from PDfs, Office files, text files, Image files.( More to come soon.)
+This  module can extract text from PDfs, Office files, text files, Image files.
+Also, we generate an excel file which gives you some deeper insights into the text. We are now only extracting insights for Image formats only.( More to come soon.)
 
 
 ## Installation
@@ -55,6 +56,17 @@ pip install pyostie
 ```python
 import pyostie
 
+# For image files with insights.
+
+output = pyostie.extract(filename, insights=True, extension="jpg") #### Format of the extension can also be "tif" or "pnb"
+df, text = output.start()
+
+# For image files without insights.
+
+output = pyostie.extract(filename, insights=False, extension="jpg")
+df = output.start()
+
+
 # For PDF files:
 
 output = pyostie.extract(filename, extension="pdf")
@@ -70,6 +82,7 @@ or
 
 output = pyostie.extract(filename, extension="xls")
 text = output.start()
+
 
 ```
 
