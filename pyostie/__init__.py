@@ -1,16 +1,15 @@
 from pyostie.parsers import *
+from pyostie.insights import *
 
 
 class extract:
 
-    def __init__(self, filename, tess_path=None, extension=None):
+    def __init__(self, filename, insights=False, tess_path=None, extension=None):
         """
 
-        :param filename:
-        :param tess_path:
-        :param extension:
         """
         self.file = filename
+        self.insights = insights
         self.path = tess_path
         self.ext = extension
 
@@ -67,3 +66,14 @@ class extract:
                     return output
                 except Exception as ex:
                     raise ex
+        elif self.ext.upper() == "JPG" or self.ext.upper() == "TIF" or self.ext.upper() == "PNG":
+            if self.insights:
+                image = generate_insights(self.file)
+                output_df = image.generate_df()
+                image = ImageParser(self.file)
+                output = image.extract_image()
+                return output_df, output
+            elif not self.insights:
+                image = ImageParser(self.file)
+                output = image.extract_image()
+                return output
