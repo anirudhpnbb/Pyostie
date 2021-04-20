@@ -1,18 +1,24 @@
 from pyostie.parsers import *
-from pyostie.insights import *
+from pyostie.insights_ext import *
 
 
 class extract:
 
     def __init__(self, filename, insights=False, tess_path=None, extension=None):
         """
+        :param filename:
+        :param insights:
+        :param tess_path:
+        :param extension:
 
+        :return:
         """
         self.file = filename
         self.insights = insights
         self.path = tess_path
         self.ext = extension
 
+    # noinspection PyBroadException
     def start(self):
         """
 
@@ -57,9 +63,7 @@ class extract:
                 output = docx.extract_docx()
                 return output
         elif self.ext.upper() == "DOC":
-            print("hey1")
             if isinstance(self.file, str):
-                print("hey2")
                 try:
                     doc = DOCParser(self.file)
                     output = doc.extract_doc()

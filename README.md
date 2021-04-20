@@ -64,7 +64,7 @@ df, text = output.start()
 # For image files without insights.
 
 output = pyostie.extract(filename, insights=False, extension="jpg")
-df = output.start()
+text = output.start()
 
 # For PDF files:
 
