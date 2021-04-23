@@ -4,10 +4,13 @@ import csv
 import cv2
 import pytesseract
 from PIL import Image
-import os
 import PyPDF2
 import pdfplumber
-from tempfile import mkdtemp
+from pdf2image import convert_from_path
+from pyostie.convert import *
+from pyostie.insights_ext import *
+
+a = pd.DataFrame()
 
 
 class DOCXParser:
@@ -26,30 +29,6 @@ class DOCXParser:
         """
         output = docx2txt.process(self.file)
         return output
-
-
-class DOCParser:
-
-    def __init__(self, filename):
-        """
-
-        :param filename:
-        """
-        self.file = filename
-
-    def extract_doc(self):
-        """
-
-        :return: Text extracted from doc files
-        """
-        filechange = self.file + "x"
-        print(filechange)
-        if not os.path.exists(filechange):
-            print("hey3")
-            os.system('antiword ' + self.file + ' > ' + filechange)
-            with open(filechange) as f:
-                text = f.read()
-            os.remove(filechange)
 
 
 class XLSXParser:
@@ -154,30 +133,56 @@ class PDFParser:
 
     """
 
-    def __init__(self, filename):
+    def __init__(self, filename, insights=False):
         """
 
         :param filename:
+        :param insights:
         """
         self.file = filename
+        self.insights = insights
 
-    def extract_pypdf2(self, **kwargs):
+    def extract_pypdf2(self):
         """
 
         :param kwargs:
         :return:
         """
-        temp_dir = mkdtemp()
-        base = os.path.join(temp_dir, 'conv')
+
         contents = []
         text = ' '
         pdfFileObj = open(self.file, 'rb')
         pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
-        for i in range(pdfReader.numPages):
-            pageObject = pdfReader.getPage(i)
-            text = text + pageObject.extractText(**kwargs)
-        contents.append(text)
-        return contents
+        pdfPages = pdfReader.getNumPages()
+        if pdfPages == 1:
+            for val in range(pdfReader.numPages):
+                pageObject = pdfReader.getPage(val)
+                text = text + pageObject.extractText()
+            contents.append(text)
+            if self.insights:
+                conv = conversion(self.file)
+                __conv = conv.convert()
+                insights = generate_insights(__conv, df)
+                __insights = insights.generate_df()
+                remove_files(__conv)
+                return __insights, contents
+            else:
+                return contents
+
+        if pdfPages >= 2:
+            print("We are currently not generating insights for multi page pdf's, so returning only text."
+                  " Please watch this space for updates.")
+            contents = []
+            text = ' '
+            pdfFileObj = open(self.file, 'rb')
+            pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
+            pdfPages = pdfReader.getNumPages()
+            for val in range(pdfPages):
+                pageObject = pdfReader.getPage(val)
+                text = text + pageObject.extractText()
+            contents.append(text)
+            emp_df = pd.DataFrame()
+            return emp_df, contents
 
     def extract_pdfplumber(self):
         """

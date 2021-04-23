@@ -1,5 +1,7 @@
 from pyostie.parsers import *
 from pyostie.insights_ext import *
+from pyostie.convert import *
+from pyostie.utils import *
 
 
 class extract:
@@ -24,10 +26,15 @@ class extract:
 
         :return: Main function to start the process.
         """
-        if self.ext.upper() == "PDF":
+        @type_check(str)
+        def ext_type_check(extnsn):
+            return extnsn.upper()
+        ext = ext_type_check(self.ext)
+
+        if ext == "PDF":
             if isinstance(self.file, str):
                 try:
-                    pdf = PDFParser(self.file)
+                    pdf = PDFParser(self.file, insights=self.insights)
                     output = pdf.extract_pypdf2()
                     return output
                 except Exception:
@@ -37,47 +44,47 @@ class extract:
                         return output
                     except Exception as ex:
                         raise ex
-        elif self.ext.upper() == "CSV":
+
+        elif ext == "CSV":
             if isinstance(self.file, str):
                 csv_output = CSVParser(self.file)
                 output = csv_output.extract_csv()
                 return output
-        elif self.ext.upper() == "TXT":
+
+        elif ext == "TXT":
             if isinstance(self.file, str):
                 txt = TXTParser(self.file)
                 output = txt.extract_txt()
                 return output
-        elif self.ext.upper() == "XLSX":
+
+        elif ext == "XLSX":
             if isinstance(self.file, str):
                 excel = XLSXParser(self.file)
                 output = excel.extract_xlsx()
                 return output
-        elif self.ext.upper() == "XLS":
+
+        elif ext == "XLS":
             if isinstance(self.file, str):
                 excel = XLSParser(self.file)
                 output = excel.extract_xls()
                 return output
-        elif self.ext.upper() == "DOCX":
+
+        elif ext == "DOCX":
             if isinstance(self.file, str):
                 docx = DOCXParser(self.file)
                 output = docx.extract_docx()
                 return output
-        elif self.ext.upper() == "DOC":
-            if isinstance(self.file, str):
-                try:
-                    doc = DOCParser(self.file)
-                    output = doc.extract_doc()
-                    return output
-                except Exception as ex:
-                    raise ex
-        elif self.ext.upper() == "JPG" or self.ext.upper() == "TIF" or self.ext.upper() == "PNG":
+
+        elif ext == "JPG" or ext == "TIF" or ext == "PNG":
             if self.insights:
-                image = generate_insights(self.file)
+                image = generate_insights(self.file, df)
                 output_df = image.generate_df()
                 image = ImageParser(self.file)
                 output = image.extract_image()
                 return output_df, output
+
             elif not self.insights:
                 image = ImageParser(self.file)
                 output = image.extract_image()
                 return output
+
