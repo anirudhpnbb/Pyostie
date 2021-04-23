@@ -11,16 +11,15 @@ class generate_insights:
     def __init__(self, filename, data):
         """
 
-        :param filename:
-        :param data:
+        :param filename: Input the filename as string.
+        :param data: Input an empty dataframe.
         """
         self.file = filename
         self.data = data
 
     def generate_df(self):
         """
-
-        :return:
+        :return: 
         """
         top_plus_height = []
         left_plus_width = []
