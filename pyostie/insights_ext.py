@@ -5,10 +5,6 @@ import pandas as pd
 import numpy as np
 from PIL import Image
 
-top_plus_height = []
-left_plus_width = []
-df = pd.DataFrame()
-
 
 class generate_insights:
 
@@ -16,6 +12,7 @@ class generate_insights:
         """
 
         :param filename:
+        :param data:
         """
         self.file = filename
         self.data = data
@@ -25,6 +22,8 @@ class generate_insights:
 
         :return:
         """
+        top_plus_height = []
+        left_plus_width = []
         img = cv2.imread(self.file)
         image = Image.open(self.file)
         w, h = image.size
@@ -61,4 +60,6 @@ class generate_insights:
         self.data['bottomRight'] = self.data['bottomRight'].str.strip(',')
         self.data['topRight'] = self.data['topRight'].str.strip(',')
         self.data = self.data.drop(["left_plus_width", "top_plus_height"], 1)
+
         return self.data
+

@@ -3,6 +3,8 @@ from pyostie.insights_ext import *
 from pyostie.convert import *
 from pyostie.utils import *
 
+df = pd.DataFrame()
+
 
 class extract:
 
