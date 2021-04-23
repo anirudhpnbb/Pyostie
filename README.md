@@ -93,8 +93,8 @@ In this version we are only able to extract text from PDFs, Excel, TXT and CSV f
 <!-- CONTACT -->
 ## Contact
 
-Anirudh Palaparthi - [@anirudh8889](https://twitter.com/anirudh8889) - aniruddhapnbb@gmail.com
+Anirudh Palaparthi - [@anirudh8889](https://twitter.com/anirudh8889) - [pnbbanirudh](https://www.linkedin.com/in/pnbbanirudh/) - aniruddhapnbb@gmail.com
 
-NSK - nsk.pramod@gmail.com
+NSK - [nskpramod](https://www.linkedin.com/in/pramodnsk/)nsk.pramod@gmail.com
 
 Project Link: [https://github.com/anirudhpnbb/Pyostie](PYOSTIE)
