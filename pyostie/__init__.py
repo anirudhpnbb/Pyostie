@@ -3,8 +3,6 @@ from pyostie.insights_ext import *
 from pyostie.convert import *
 from pyostie.utils import *
 
-df = pd.DataFrame()
-
 
 class extract:
 
@@ -28,10 +26,11 @@ class extract:
 
         :return: Main function to start the process.
         """
-        @type_check(str)
+        @extension_type_check(self.ext, str)
         def ext_type_check(extnsn):
             return extnsn.upper()
         ext = ext_type_check(self.ext)
+        print(ext)
 
         if ext == "PDF":
             if isinstance(self.file, str):
@@ -65,19 +64,13 @@ class extract:
                 output = excel.extract_xlsx()
                 return output
 
-        elif ext == "XLS":
-            if isinstance(self.file, str):
-                excel = XLSParser(self.file)
-                output = excel.extract_xls()
-                return output
-
         elif ext == "DOCX":
             if isinstance(self.file, str):
                 docx = DOCXParser(self.file)
                 output = docx.extract_docx()
                 return output
 
-        elif ext == "JPG" or ext == "TIF" or ext == "PNG":
+        elif ext == "JPG":
             if self.insights:
                 image = generate_insights(self.file, df)
                 output_df = image.generate_df()
@@ -90,3 +83,7 @@ class extract:
                 output = image.extract_image()
                 return output
 
+        elif ext == "PPTX":
+            pptx = PPTXParser(self.file)
+            output = pptx.extract_pptx()
+            return output

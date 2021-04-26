@@ -6,6 +6,7 @@ import pytesseract
 from PIL import Image
 import PyPDF2
 import pdfplumber
+from pptx import Presentation
 from pdf2image import convert_from_path
 from pyostie.convert import *
 from pyostie.insights_ext import *
@@ -41,30 +42,6 @@ class XLSXParser:
         self.file = filename
 
     def extract_xlsx(self):
-        """
-
-        :return:
-        """
-        out_list = []
-        book = xlrd.open_workbook(self.file)
-        for val in range(len(book.sheet_names())):
-            sheet = book.sheet_by_index(val)
-            for res in range(sheet.nrows):
-                output = " " + " ".join(str(val_) for val_ in (sheet.row_values(res)))
-                out_list.append(output)
-        return out_list
-
-
-class XLSParser:
-
-    def __init__(self, filename):
-        """
-
-        :param filename:
-        """
-        self.file = filename
-
-    def extract_xls(self):
         """
 
         :return:
@@ -182,7 +159,17 @@ class PDFParser:
                 text = text + pageObject.extractText()
             contents.append(text)
             emp_df = pd.DataFrame()
-            return emp_df, contents
+            if self.insights:
+                for val in range(pdfPages):
+                    conv = conversion(pdfReader.getPage(val))
+                    __conv = conv.convert()
+                    insights = generate_insights(__conv, emp_df)
+                    __insights = insights.generate_df()
+                    remove_files(__conv)
+                df1 = pd.concat([df, emp_df])
+                return df1
+            else:
+                return emp_df, contents
 
     def extract_pdfplumber(self):
         """
@@ -214,3 +201,29 @@ class TXTParser:
         """
         with open(self.file) as file:
             return file.read()
+
+
+class PPTXParser:
+
+    def __init__(self, filename):
+        """
+
+        :param filename:
+        """
+        self.file = filename
+
+    def extract_pptx(self):
+        """
+        :return:
+        """
+        text_runs = []
+        paper = Presentation(self.file)
+        for slide in paper.slides:
+            for shape in slide.shapes:
+                if not shape.has_text_frame:
+                    continue
+                for paragraph in shape.text_frame.paragraphs:
+                    stripped = paragraph.text.strip()
+                    if stripped:
+                        text_runs.append(paragraph.text)
+        return text_runs
