@@ -6,6 +6,9 @@ import numpy as np
 from PIL import Image
 
 
+df = pd.DataFrame()
+
+
 class generate_insights:
 
     def __init__(self, filename, data):
@@ -19,7 +22,7 @@ class generate_insights:
 
     def generate_df(self):
         """
-        :return: 
+        :return:
         """
         top_plus_height = []
         left_plus_width = []

@@ -2,6 +2,8 @@ import os
 import shutil
 import datetime
 
+extensions = {"jpeg": "jpg", "tiff":"jpg", "tif": "jpg", "":"txt", "log":"txt", "xls": "xlsx"}
+
 
 def process_files(file_list, output_path, folder_name):
     try:
@@ -27,15 +29,19 @@ def process_files(file_list, output_path, folder_name):
 
 
 def remove_files(filename_with_path):
+    """
+
+    """
     if os.path.isfile(filename_with_path):
         os.remove(filename_with_path)
 
 
-def type_check(input_type):
+def extension_type_check(extension, input_type):
     def decorator(function):
         def wrapper(args):
             if isinstance(args, input_type):
-                return function(args)
+                extnsn = extensions.get(extension, extension)
+                return extnsn
             else:
                 print("Bad input type.")
         return wrapper
