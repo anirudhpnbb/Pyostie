@@ -216,7 +216,7 @@ class PPTXParser:
         """
         :return:
         """
-        text_runs = []
+        text = []
         paper = Presentation(self.file)
         for slide in paper.slides:
             for shape in slide.shapes:
@@ -225,5 +225,5 @@ class PPTXParser:
                 for paragraph in shape.text_frame.paragraphs:
                     stripped = paragraph.text.strip()
                     if stripped:
-                        text_runs.append(paragraph.text)
-        return text_runs
+                        text.append(paragraph.text)
+        return text
