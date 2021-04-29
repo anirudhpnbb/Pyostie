@@ -28,11 +28,11 @@ class extract:
         """
         @extension_type_check(self.ext, str)
         def ext_type_check(extnsn):
-            return extnsn.upper()
+            return extnsn
         ext = ext_type_check(self.ext)
         print(ext)
 
-        if ext == "PDF":
+        if ext.upper() == "PDF":
             if isinstance(self.file, str):
                 try:
                     pdf = PDFParser(self.file, insights=self.insights)

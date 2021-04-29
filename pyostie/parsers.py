@@ -126,6 +126,7 @@ class PDFParser:
         :return:
         """
 
+        global __insights
         contents = []
         text = ' '
         pdfFileObj = open(self.file, 'rb')
@@ -159,17 +160,7 @@ class PDFParser:
                 text = text + pageObject.extractText()
             contents.append(text)
             emp_df = pd.DataFrame()
-            if self.insights:
-                for val in range(pdfPages):
-                    conv = conversion(pdfReader.getPage(val))
-                    __conv = conv.convert()
-                    insights = generate_insights(__conv, emp_df)
-                    __insights = insights.generate_df()
-                    remove_files(__conv)
-                df1 = pd.concat([df, emp_df])
-                return df1
-            else:
-                return emp_df, contents
+            return emp_df, contents
 
     def extract_pdfplumber(self):
         """

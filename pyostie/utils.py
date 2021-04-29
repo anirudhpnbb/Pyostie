@@ -41,7 +41,7 @@ def extension_type_check(extension, input_type):
         def wrapper(args):
             if isinstance(args, input_type):
                 extnsn = extensions.get(extension, extension)
-                return extnsn
+                return extnsn.upper()
             else:
                 print("Bad input type.")
         return wrapper
