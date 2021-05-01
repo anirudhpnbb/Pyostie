@@ -1,5 +1,5 @@
 <!-- PROJECT SHIELDS -->
-[![Upload Python Package](https://github.com/anirudhpnbb/Pyostie/actions/workflows/python-publish.yml/badge.svg)](https://github.com/anirudhpnbb/Pyostie/actions/workflows/python-publish.yml)
+[![Upload Python Package](https://github.com/anirudhpnbb/Pyostie/actions/workflows/python-publish.yml/badge.svg?branch=2.3)](https://github.com/anirudhpnbb/Pyostie/actions/workflows/python-publish.yml)
 <!--
 *** I'm using markdown "reference style" links for readability.
 *** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
