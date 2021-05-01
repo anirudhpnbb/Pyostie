@@ -1,5 +1,5 @@
 <!-- PROJECT SHIELDS -->
-[![Publish Pyostie to PyPI](https://github.com/anirudhpnbb/Pyostie/actions/workflows/python-publish.yml/badge.svg)](https://github.com/anirudhpnbb/Pyostie/actions/workflows/python-publish.yml)
+[![BUILD](https://github.com/anirudhpnbb/Pyostie/actions/workflows/python-publish.yml/badge.svg)](https://github.com/anirudhpnbb/Pyostie/actions/workflows/python-publish.yml)
 <!--
 *** I'm using markdown "reference style" links for readability.
 *** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
