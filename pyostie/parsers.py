@@ -1,4 +1,5 @@
 import docx2txt
+import pandas as pd
 import xlrd
 import csv
 import cv2
@@ -148,6 +149,7 @@ class PDFParser:
                 return contents
 
         if pdfPages >= 2:
+            pdf_multipage_df = pd.DataFrame()
             for val in range(pdfReader.numPages):
                 pageObject = pdfReader.getPage(val)
                 text = text + pageObject.extractText()
@@ -170,7 +172,7 @@ class PDFParser:
                     page = [val] * len(__insights)
                     __insights["page_num"] = page
                     df_list.append(__insights)
-                pdf_multipage_df = pd.concat(df_list)
+                pdf_multipage_df = pd.concat([pdf_multipage_df, df_list])
                 shutil.rmtree(tempdir)
                 df1 = pdf_multipage_df.reset_index()
                 df1 = df1.drop("index", 1)
