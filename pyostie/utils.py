@@ -36,6 +36,14 @@ def remove_files(filename_with_path):
         os.remove(filename_with_path)
 
 
+def remove_folder(foldername_with_path):
+    """
+
+    """
+    if os.path.isdir(foldername_with_path):
+        shutil.rmtree(foldername_with_path)
+
+
 def extension_type_check(extension, input_type):
     def decorator(function):
         def wrapper(args):

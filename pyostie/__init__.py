@@ -35,14 +35,24 @@ class extract:
         if ext.upper() == "PDF":
             if isinstance(self.file, str):
                 try:
-                    pdf = PDFParser(self.file, insights=self.insights)
-                    output = pdf.extract_pypdf2()
-                    return output
+                    if self.insights:
+                        pdf = PDFParser(self.file, insights=self.insights)
+                        output_df, output = pdf.extract_pypdf2()
+                        return output_df, output
+                    else:
+                        pdf = PDFParser(self.file, insights=self.insights)
+                        output = pdf.extract_pypdf2()
+                        return output
                 except Exception:
                     try:
-                        pdf = PDFParser(self.file)
-                        output = pdf.extract_pdfplumber()
-                        return output
+                        if self.insights:
+                            pdf = PDFParser(self.file)
+                            output_df, output = pdf.extract_pdfplumber()
+                            return output_df, output
+                        else:
+                            pdf = PDFParser(self.file)
+                            output = pdf.extract_pdfplumber()
+                            return output
                     except Exception as ex:
                         raise ex
 

@@ -12,6 +12,7 @@ from pyostie.convert import *
 from pyostie.insights_ext import *
 
 a = pd.DataFrame()
+ocr_dict_output = []
 
 
 class DOCXParser:
@@ -126,7 +127,6 @@ class PDFParser:
         :return:
         """
 
-        global __insights
         contents = []
         text = ' '
         pdfFileObj = open(self.file, 'rb')
@@ -148,19 +148,35 @@ class PDFParser:
                 return contents
 
         if pdfPages >= 2:
-            print("We are currently not generating insights for multi page pdf's, so returning only text."
-                  " Please watch this space for updates.")
-            contents = []
-            text = ' '
-            pdfFileObj = open(self.file, 'rb')
-            pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
-            pdfPages = pdfReader.getNumPages()
-            for val in range(pdfPages):
+            for val in range(pdfReader.numPages):
                 pageObject = pdfReader.getPage(val)
                 text = text + pageObject.extractText()
             contents.append(text)
-            emp_df = pd.DataFrame()
-            return emp_df, contents
+            if self.insights:
+                df_list = []
+                pdffile = self.file
+                os.mkdir("tempdir")
+                tempdir = "tempdir/"
+                os.mkdir("tempdir/converted_files")
+                images = convert_from_path(pdffile)
+                converted_files = tempdir + "converted_files/"
+                for val in range(len(images)):
+                    images[val - 1].save(converted_files + str(val) + ".jpg", "JPEG")
+                jpgfiles = os.listdir(converted_files)
+                output_files = [converted_files + os.sep + _val for _val in jpgfiles if _val[-3:].upper() == "JPG"]
+                for val in range(len(output_files)):
+                    insights = generate_insights(output_files[val], df)
+                    __insights = insights.generate_df()
+                    page = [val] * len(__insights)
+                    __insights["page_num"] = page
+                    df_list.append(__insights)
+                pdf_multipage_df = pd.concat(df_list)
+                shutil.rmtree(tempdir)
+                df1 = pdf_multipage_df.reset_index()
+                df1 = df1.drop("index", 1)
+                return df1, contents
+            else:
+                return contents
 
     def extract_pdfplumber(self):
         """
