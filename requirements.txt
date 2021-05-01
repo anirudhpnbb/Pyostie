@@ -1,0 +1,11 @@
+DateTime
+pdf2image
+docx2txt
+xlrd
+pytesseract
+PyPDF2
+pdfplumber
+Pillow
+pandas
+numpy
+setuptools
