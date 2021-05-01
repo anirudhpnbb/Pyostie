@@ -8,7 +8,7 @@ setuptools.setup(
     name="Pyostie",
 
     # version of the module
-    version="2.2",
+    version="2.3",
 
     # Name of Author
     author="Anirudh Palaparthi",
