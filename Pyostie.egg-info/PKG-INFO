@@ -1,0 +1,13 @@
+Metadata-Version: 1.1
+Name: Pyostie
+Version: 2.0
+Summary: A python package to OCR data and extract text with insights too.
+Home-page: https://github.com/anirudhpnbb/Pyostie
+Author: Anirudh Palaparthi
+Author-email: anirudhpalaparthi@gmail.com
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent

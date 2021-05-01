@@ -1,0 +1,9 @@
+opencv-python
+numpy
+pandas
+PyPDF2
+pdfplumber
+xlrd
+docx2txt
+pytesseract
+Pillow
