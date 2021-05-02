@@ -102,4 +102,4 @@ Anirudh Palaparthi - [@anirudh8889](https://twitter.com/anirudh8889) - [pnbbanir
 
 NSK - [nskpramod](https://www.linkedin.com/in/pramodnsk/) - nsk.pramod@gmail.com
 
-Project Link: [https://github.com/anirudhpnbb/Pyostie](PYOSTIE)
+Project Link: [PYOSTIE](https://github.com/anirudhpnbb/Pyostie)
