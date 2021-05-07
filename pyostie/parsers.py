@@ -9,6 +9,7 @@ import PyPDF2
 import pdfplumber
 from pptx import Presentation
 from pdf2image import convert_from_path
+import speech_recognition as sr
 from pyostie.convert import *
 from pyostie.insights_ext import *
 
@@ -236,3 +237,25 @@ class PPTXParser:
                     if stripped:
                         text.append(paragraph.text)
         return text
+
+
+class speech_to_text:
+
+    def __init__(self, filename):
+        """
+        :param filename:
+        """
+        self.file = filename
+
+    def extract_audio(self):
+        """
+        :return:
+        """
+        output_audio = []
+        os.mkdir("tempdir/")
+        dst_file = mp3_to_wav(self.file, "tempdir/sample.wav", format="wav")
+        output = sr.AudioFile(dst_file)
+        recog = sr.Recognizer()
+        with output as source:
+            audio = recog.record(source)
+        output_audio.append(recog.recognize_google(audio))
