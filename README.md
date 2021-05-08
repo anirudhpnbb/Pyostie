@@ -101,9 +101,15 @@ output = pyostie.extract(filename, extension="docx")
 text = output.start()
 ```
 
+# For audio files
+```python
+output = pyostie.extract(filename, extension="mp3")
+text = output.start()
+```
+
 ## Future Works
 
-In this version, we can only extract text from PDFs, Excel, TXT, and CSV formats. Soon, we will be adding doc, ppt, pptx, and many more. Watch this space for more updates.
+In this version, we can only extract text from PDFs, Excel, TXT, CSV and MP3 formats. Soon, we will be adding doc, ppt, pptx, and many more. Watch this space for more updates.
 
 <!-- CONTACT -->
 ## Contact
