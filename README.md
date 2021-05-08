@@ -3,7 +3,7 @@
 [![Python package](https://github.com/anirudhpnbb/Pyostie/actions/workflows/python-package.yml/badge.svg?branch=main)](https://github.com/anirudhpnbb/Pyostie/actions/workflows/python-package.yml)
 [![release](https://img.shields.io/github/release/anirudhpnbb/Pyostie)](https://img.shields.io/github/release/anirudhpnbb/Pyostie)
 <a href="https://github.com/anirudhpnbb/shields/graphs/contributors" alt="Contributors">
-    <img src="https://img.shields.io/github/contributors/badges/shields" /></a>
+    <img src="https://img.shields.io/anirudhpnbb/contributors/badges/shields" /></a>
 <!--
 *** I'm using markdown "reference style" links for readability.
 *** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
