@@ -2,8 +2,9 @@ from os import path
 import pytest
 import pyostie
 from pkgutil import find_loader
+from pytesseract import Output
 
-image_path = "image/"
+files_path = "test_files/"
 expected_columns = [
     'page_num',
     'par_num',
@@ -32,9 +33,13 @@ if numpy_installed:
     import numpy as np
 
 
+def test_placeholder():
+    pass
+
+
 @pytest.fixture(scope='session')
 def test_file():
-    return path.join(image_path, 'sample.tif')
+    return path.join(files_path, 'sample.tif')
 
 
 @pytest.mark.skipif(pandas_installed is False, reason='requires pandas')
@@ -43,3 +48,21 @@ def pyostie_dataframe_output(test_file):
     df, text = output.start()
     assert isinstance(df, pd.DataFrame)
     assert bool(set(df.columns).intersection(expected_columns))
+
+
+@pytest.mark.parametrize(
+    'output',
+    [Output.STRING, list],
+    ids=['bytes', 'dict', 'string'],
+)
+@pytest.mark.skipif(pandas_installed is False, reason="requires pandas")
+def pyostie_text_output(test_file, output):
+    output = pyostie.extract(test_file, insights=False, extension="tif")
+    text = output.start()
+    if output == Output.STRING:
+        assert isinstance(text, str)
+    elif output == list:
+        assert isinstance(text, list)
+
+
+
