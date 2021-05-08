@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4a91ac74-9d88-4dc9-bfaf-e65bde3974bb" name="Default Changelist" comment="PPTX update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyostie/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyostie/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyostie/parsers.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyostie/parsers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyostie/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyostie/utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +13,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Setup Script" />
-        <option value="Python Unit Test" />
         <option value="Python Script" />
+        <option value="Python Unit Test" />
       </list>
     </option>
   </component>
