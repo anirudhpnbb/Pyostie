@@ -19,7 +19,7 @@ setuptools.setup(
     # Small Description about module
     description="A python package to OCR data and extract text with insights too.",
 
-    long_description=long_description,
+    long_description="www.anirudhpnbb.github.io/Pyostie",
 
     # Specifying that we are using markdown file for description
     long_description_content_type="text/markdown",
