@@ -5,6 +5,7 @@ xlrd
 pytesseract
 PyPDF2
 pdfplumber
+pptx
 Pillow
 pandas
 numpy
