@@ -32,6 +32,9 @@ numpy_installed = find_loader("numpy") is not None
 if numpy_installed:
     import numpy as np
 
+def test_placeholder():
+    pass
+    
 
 def test_placeholder():
     pass
