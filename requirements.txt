@@ -10,4 +10,5 @@ opencv-python
 Pillow
 pandas
 numpy
+pydub
 setuptools
