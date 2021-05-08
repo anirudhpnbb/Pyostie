@@ -1,8 +1,10 @@
 import os
 import shutil
 import datetime
+import tempfile
+import pydub
 
-extensions = {"jpeg": "jpg", "tiff":"jpg", "tif": "jpg", "":"txt", "log":"txt", "xls": "xlsx"}
+extensions = {"jpeg": "jpg", "tiff":"jpg", "tif": "jpg", "":"txt", "log":"txt", "xls": "xlsx", "mp3":"wav"}
 
 
 def process_files(file_list, output_path, folder_name):
@@ -54,3 +56,9 @@ def extension_type_check(extension, input_type):
                 print("Bad input type.")
         return wrapper
     return decorator
+
+
+def mp3_to_wav(source, dst, format):
+    sound = pydub.AudioSegment.from_mp3(source)
+    sound.export(dst, format=format)
+    return dst
