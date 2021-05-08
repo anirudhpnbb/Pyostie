@@ -5,7 +5,11 @@ xlrd
 pytesseract
 PyPDF2
 pdfplumber
+python-pptx
+opencv-python
 Pillow
+ffmpeg
 pandas
 numpy
+pydub
 setuptools
