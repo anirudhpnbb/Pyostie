@@ -8,6 +8,7 @@ pdfplumber
 python-pptx
 opencv-python
 Pillow
+ffmpeg
 pandas
 numpy
 pydub
