@@ -97,3 +97,8 @@ class extract:
             pptx = PPTXParser(self.file)
             output = pptx.extract_pptx()
             return output
+
+        elif ext == "WAV":
+            wav = speech_to_text(self.file)
+            output = wav.extract_audio()
+            return output

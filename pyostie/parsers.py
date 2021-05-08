@@ -1,3 +1,5 @@
+import os
+
 import docx2txt
 import pandas as pd
 import xlrd
@@ -252,10 +254,12 @@ class speech_to_text:
         :return:
         """
         output_audio = []
-        os.mkdir("tempdir/")
+        os.mkdir("tempdir")
         dst_file = mp3_to_wav(self.file, "tempdir/sample.wav", format="wav")
         output = sr.AudioFile(dst_file)
         recog = sr.Recognizer()
         with output as source:
             audio = recog.record(source)
         output_audio.append(recog.recognize_google(audio))
+        shutil.rmtree("tempdir")
+        return output_audio

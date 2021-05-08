@@ -4,7 +4,7 @@ import datetime
 import tempfile
 import pydub
 
-extensions = {"jpeg": "jpg", "tiff":"jpg", "tif": "jpg", "":"txt", "log":"txt", "xls": "xlsx"}
+extensions = {"jpeg": "jpg", "tiff":"jpg", "tif": "jpg", "":"txt", "log":"txt", "xls": "xlsx", "mp3":"wav"}
 
 
 def process_files(file_list, output_path, folder_name):
