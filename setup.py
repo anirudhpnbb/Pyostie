@@ -28,7 +28,7 @@ setuptools.setup(
     url="https://github.com/anirudhpnbb/Pyostie",
     packages=setuptools.find_packages(),
     include_package_data=True,
-    install_requires=["opencv-python", "numpy", "pandas", "PyPDF2", "pdfplumber", "xlrd", "docx2txt", "pytesseract", "Pillow"],
+    install_requires=["opencv-python", "numpy", "pandas", "PyPDF2", "pdfplumber", "xlrd", "docx2txt", "pytesseract", "Pillow", "SpeechRecognition"],
     # classifiers like program is suitable for python3, just leave as it is.
     classifiers=[
         "Programming Language :: Python :: 3",
