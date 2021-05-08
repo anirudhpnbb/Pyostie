@@ -19,7 +19,7 @@ setuptools.setup(
     # Small Description about module
     description="A python package to OCR data and extract text with insights too.",
 
-    long_description=long_description,
+    long_description="www.anirudhpnbb.github.io/Pyostie",
 
     # Specifying that we are using markdown file for description
     long_description_content_type="text/markdown",
@@ -28,7 +28,7 @@ setuptools.setup(
     url="https://github.com/anirudhpnbb/Pyostie",
     packages=setuptools.find_packages(),
     include_package_data=True,
-    install_requires=["opencv-python", "numpy", "pandas", "PyPDF2", "pdfplumber", "xlrd", "docx2txt", "pytesseract", "Pillow"],
+    install_requires=["opencv-python", "numpy", "pandas", "PyPDF2", "pdfplumber", "xlrd", "docx2txt", "pytesseract", "Pillow", "SpeechRecognition"],
     # classifiers like program is suitable for python3, just leave as it is.
     classifiers=[
         "Programming Language :: Python :: 3",
