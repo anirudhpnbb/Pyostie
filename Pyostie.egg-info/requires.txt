@@ -7,3 +7,4 @@ xlrd
 docx2txt
 pytesseract
 Pillow
+SpeechRecognition
