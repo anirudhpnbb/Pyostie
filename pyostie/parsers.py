@@ -1,19 +1,23 @@
 import os
-
 import docx2txt
-import pandas as pd
 import xlrd
 import csv
 import cv2
 import pytesseract
 from PIL import Image
+from pkgutil import find_loader
 import PyPDF2
 import pdfplumber
 from pptx import Presentation
 from pdf2image import convert_from_path
 import speech_recognition as sr
+
 from pyostie.convert import *
 from pyostie.insights_ext import *
+
+pandas_installed = find_loader("pandas") is not None
+if pandas_installed:
+    import pandas as pd
 
 a = pd.DataFrame()
 ocr_dict_output = []
@@ -162,6 +166,8 @@ class PDFParser:
                 pdffile = self.file
                 os.mkdir("tempdir")
                 tempdir = "tempdir/"
+                if os.path.isdir(tempdir):
+                    shutil.rmtree(tempdir)
                 os.mkdir("tempdir/converted_files")
                 images = convert_from_path(pdffile)
                 converted_files = tempdir + "converted_files/"
@@ -175,7 +181,7 @@ class PDFParser:
                     page = [val] * len(__insights)
                     __insights["page_num"] = page
                     df_list.append(__insights)
-                pdf_multipage_df = pd.concat([pdf_multipage_df, df_list])
+                    pdf_multipage_df = pd.concat([pdf_multipage_df, __insights])
                 shutil.rmtree(tempdir)
                 df1 = pdf_multipage_df.reset_index()
                 df1 = df1.drop("index", 1)
