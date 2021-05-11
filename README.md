@@ -26,7 +26,6 @@
 * [Future Work](#Futurework)
 * [Contact](#contact)
 
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
