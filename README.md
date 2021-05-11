@@ -1,11 +1,12 @@
 <!-- PROJECT SHIELDS -->
+<img alt="Python" src="https://img.shields.io/badge/python-%2314354C.svg?&style=for-the-badge&logo=python&logoColor=white"/>
+\n
 [![Upload Python Package](https://github.com/anirudhpnbb/Pyostie/actions/workflows/python-publish.yml/badge.svg?branch=2.4.5)](https://github.com/anirudhpnbb/Pyostie/actions/workflows/python-publish.yml)
 [![Python package](https://github.com/anirudhpnbb/Pyostie/actions/workflows/python-package.yml/badge.svg?branch=main)](https://github.com/anirudhpnbb/Pyostie/actions/workflows/python-package.yml)
 [![release](https://img.shields.io/github/release/anirudhpnbb/Pyostie)](https://img.shields.io/github/release/anirudhpnbb/Pyostie)
 <a href="https://github.com/anirudhpnbb/Pyostie/graphs/contributors" alt="Contributors">
     <img src="https://img.shields.io/github/contributors/anirudhpnbb/Pyostie" /></a>
 <img src="https://img.shields.io/github/stars/anirudhpnbb/Pyostie?style=flat" />
-<img alt="Python" src="https://img.shields.io/badge/python-%2314354C.svg?&style=for-the-badge&logo=python&logoColor=white"/>
 <!--
 *** I'm using markdown "reference style" links for readability.
 *** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
