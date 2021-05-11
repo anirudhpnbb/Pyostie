@@ -6,6 +6,7 @@
 <img src="https://img.shields.io/github/stars/anirudhpnbb/Pyostie?style=flat"/>
 <img src="https://img.shields.io/github/license/anirudhpnbb/Pyostie"/>
 <img src="https://img.shields.io/github/watchers/anirudhpnbb/Pyostie"/>
+<img src="https://img.shields.io/github/languages/top/anirudhpnbb/Pyostie"/>
 <!--
 *** I'm using markdown "reference style" links for readability.
 *** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
