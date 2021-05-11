@@ -4,6 +4,7 @@
 [![release](https://img.shields.io/github/release/anirudhpnbb/Pyostie)](https://img.shields.io/github/release/anirudhpnbb/Pyostie)
 <a href="https://github.com/anirudhpnbb/Pyostie/graphs/contributors" alt="Contributors">
     <img src="https://img.shields.io/github/contributors/anirudhpnbb/Pyostie" /></a>
+<img alt="Python" src="https://img.shields.io/badge/python-%2314354C.svg?&style=for-the-badge&logo=python&logoColor=white"/>
 <!--
 *** I'm using markdown "reference style" links for readability.
 *** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
