@@ -5,7 +5,7 @@
 <a href="https://github.com/anirudhpnbb/Pyostie/graphs/contributors" alt="Contributors">
     <img src="https://img.shields.io/github/contributors/anirudhpnbb/Pyostie" /></a>
 <a href="https://github.com/anirudhpnbb/Pyostie/Languages" alt="Languages">
-    <img src="https://img.shields.io/github/Languages/anirudhpnbb/Pyostie" /></a>
+    <img src="https://https://img.shields.io/badge/language-python%2035.5%25-blue.svg" /></a>
 <img alt="Python" src="https://img.shields.io/badge/python-%2314354C.svg?&style=for-the-badge&logo=python&logoColor=white"/>
 <!--
 *** I'm using markdown "reference style" links for readability.
