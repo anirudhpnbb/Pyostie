@@ -4,6 +4,7 @@
 [![release](https://img.shields.io/github/release/anirudhpnbb/Pyostie)](https://img.shields.io/github/release/anirudhpnbb/Pyostie)
 <img src="https://img.shields.io/github/contributors/anirudhpnbb/Pyostie"/>
 <img src="https://img.shields.io/github/stars/anirudhpnbb/Pyostie?style=flat"/>
+<img src="https://img.shields.io/github/forks/anirudhpnbb/Pyostie?style=flat"/>
 <img src="https://img.shields.io/github/license/anirudhpnbb/Pyostie"/>
 <img src="https://img.shields.io/github/watchers/anirudhpnbb/Pyostie"/>
 <img src="https://img.shields.io/github/languages/top/anirudhpnbb/Pyostie"/>
