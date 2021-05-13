@@ -8,7 +8,7 @@ setuptools.setup(
     name="Pyostie",
 
     # version of the module
-    version="2.4.8",
+    version="2.5.0",
 
     # Name of Author
     author="Anirudh Palaparthi",
@@ -19,7 +19,7 @@ setuptools.setup(
     # Small Description about module
     description="A python package to OCR data and extract text with insights too.",
 
-    long_description="www.anirudhpnbb.github.io/Pyostie",
+    long_description="https://anirudhpnbb.github.io/Pyostie",
 
     # Specifying that we are using markdown file for description
     long_description_content_type="text/markdown",
