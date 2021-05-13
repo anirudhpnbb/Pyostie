@@ -2,16 +2,19 @@ from pyostie.parsers import *
 from pyostie.insights_ext import *
 from pyostie.convert import *
 from pyostie.utils import *
+from pyostie.plots import *
 
 
 class extract:
 
-    def __init__(self, filename, insights=False, tess_path=None, extension=None):
+    def __init__(self, filename, insights=False, tess_path=None, extension=None, plotting=True, figsize=None):
         """
         :param filename:
         :param insights:
         :param tess_path:
         :param extension:
+        :param plotting:
+        :param figsize:
 
         :return:
         """
@@ -19,6 +22,8 @@ class extract:
         self.insights = insights
         self.path = tess_path
         self.ext = extension
+        self.plots = plotting
+        self.size = figsize
 
     # noinspection PyBroadException
     def start(self):
@@ -26,9 +31,11 @@ class extract:
 
         :return: Main function to start the process.
         """
+
         @extension_type_check(self.ext, str)
         def ext_type_check(extnsn):
             return extnsn
+
         ext = ext_type_check(self.ext)
         print(ext)
 
@@ -82,16 +89,44 @@ class extract:
 
         elif ext == "JPG":
             if self.insights:
-                image = generate_insights(self.file, df)
-                output_df = image.generate_df()
-                image = ImageParser(self.file)
-                output = image.extract_image()
-                return output_df, output
+                if self.plots:
+                    image = generate_insights(self.file, df)
+                    output_df = image.generate_df()
+                    image = ImageParser(self.file)
+                    output = image.extract_image()
+                    if isinstance(output, str):
+                        plot = draw(output, self.size)
+                        plot.WC()
+                        plot.count_plot()
+                    elif isinstance(output, list):
+                        plot = draw(output[0], self.size)
+                        plot.WC()
+                        plot.count_plot()
+                    return output_df, output
+                elif not self.plots:
+                    image = generate_insights(self.file, df)
+                    output_df = image.generate_df()
+                    image = ImageParser(self.file)
+                    output = image.extract_image()
+                    return output_df, output
 
             elif not self.insights:
-                image = ImageParser(self.file)
-                output = image.extract_image()
-                return output
+                if self.plots:
+                    image = ImageParser(self.file)
+                    output = image.extract_image()
+                    if isinstance(output, str):
+                        plot = draw(output)
+                        plot.WC()
+                        plot.count_plot()
+                    elif isinstance(output, list):
+                        plot = draw(output[0])
+                        plot.WC()
+                        plot.count_plot()
+                    return output
+                elif not self.plots:
+                    image = ImageParser(self.file)
+                    output = image.extract_image()
+                    return output
 
         elif ext == "PPTX":
             pptx = PPTXParser(self.file)

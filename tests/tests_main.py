@@ -32,9 +32,6 @@ numpy_installed = find_loader("numpy") is not None
 if numpy_installed:
     import numpy as np
 
-def test_placeholder():
-    pass
-    
 
 def test_placeholder():
     pass
@@ -56,16 +53,13 @@ def pyostie_dataframe_output(test_file):
 @pytest.mark.parametrize(
     'output',
     [Output.STRING, list],
-    ids=['bytes', 'dict', 'string'],
+    ids=['string', 'list'],
 )
 @pytest.mark.skipif(pandas_installed is False, reason="requires pandas")
 def pyostie_text_output(test_file, output):
-    output = pyostie.extract(test_file, insights=False, extension="tif")
-    text = output.start()
+    output1 = pyostie.extract(test_file, insights=False, extension="tif")
+    text = output1.start()
     if output == Output.STRING:
         assert isinstance(text, str)
     elif output == list:
         assert isinstance(text, list)
-
-
-
