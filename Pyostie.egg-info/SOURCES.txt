@@ -10,4 +10,5 @@ pyostie/__init__.py
 pyostie/convert.py
 pyostie/insights_ext.py
 pyostie/parsers.py
+pyostie/plots.py
 pyostie/utils.py
