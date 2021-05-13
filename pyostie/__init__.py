@@ -1,3 +1,5 @@
+import pandas as pd
+
 from pyostie.parsers import *
 from pyostie.insights_ext import *
 from pyostie.convert import *
@@ -43,9 +45,22 @@ class extract:
             if isinstance(self.file, str):
                 try:
                     if self.insights:
-                        pdf = PDFParser(self.file, insights=self.insights)
-                        output_df, output = pdf.extract_pypdf2()
-                        return output_df, output
+                        if self.plots:
+                            pdf = PDFParser(self.file, insights=self.insights)
+                            output_df, output = pdf.extract_pypdf2()
+                            if isinstance(output, str):
+                                plot = draw(output, self.size)
+                                plot.WC()
+                                plot.count_plot()
+                            elif isinstance(output, list):
+                                plot = draw(output[0], self.size)
+                                plot.WC()
+                                plot.count_plot()
+                            return output_df, output
+                        elif not self.plots:
+                            pdf = PDFParser(self.file, insights=self.insights)
+                            output_df, output = pdf.extract_pypdf2()
+                            return output_df, output
                     else:
                         pdf = PDFParser(self.file, insights=self.insights)
                         output = pdf.extract_pypdf2()
@@ -53,9 +68,22 @@ class extract:
                 except Exception:
                     try:
                         if self.insights:
-                            pdf = PDFParser(self.file)
-                            output_df, output = pdf.extract_pdfplumber()
-                            return output_df, output
+                            if self.plots:
+                                pdf = PDFParser(self.file)
+                                output_df, output = pdf.extract_pdfplumber()
+                                if isinstance(output, str):
+                                    plot = draw(output, self.size)
+                                    plot.WC()
+                                    plot.count_plot()
+                                elif isinstance(output, list):
+                                    plot = draw(output[0], self.size)
+                                    plot.WC()
+                                    plot.count_plot()
+                                return output_df, output
+                            elif not self.plots:
+                                pdf = PDFParser(self.file)
+                                output_df, output = pdf.extract_pdfplumber()
+                                return output_df, output
                         else:
                             pdf = PDFParser(self.file)
                             output = pdf.extract_pdfplumber()
@@ -65,29 +93,81 @@ class extract:
 
         elif ext == "CSV":
             if isinstance(self.file, str):
-                csv_output = CSVParser(self.file)
-                output = csv_output.extract_csv()
-                return output
+                if self.plots:
+                    csv_output = CSVParser(self.file)
+                    output = csv_output.extract_csv()
+                    if isinstance(output, str):
+                        plots = draw(output, self.size)
+                        plots.WC()
+                        plots.count_plot()
+                    elif isinstance(output, list):
+                        plots = draw(output[0], self.size)
+                        plots.WC()
+                        plots.count_plot()
+                    return output
+                elif not self.plots:
+                    csv_output = CSVParser(self.file)
+                    output = csv_output.extract_csv()
+                    return output
 
         elif ext == "TXT":
             if isinstance(self.file, str):
-                txt = TXTParser(self.file)
-                output = txt.extract_txt()
-                return output
+                if self.plots:
+                    txt = TXTParser(self.file)
+                    output = txt.extract_txt()
+                    if isinstance(output, str):
+                        plot = draw(output, self.size)
+                        plot.WC()
+                        plot.count_plot()
+                    elif isinstance(output, list):
+                        plot = draw(output[0], self.size)
+                        plot.WC()
+                        plot.count_plot()
+                    return output
+                elif not self.plots:
+                    txt = TXTParser(self.file)
+                    output = txt.extract_txt()
+                    return output
 
         elif ext == "XLSX":
             if isinstance(self.file, str):
-                excel = XLSXParser(self.file)
-                output = excel.extract_xlsx()
-                return output
+                if self.plots:
+                    excel = XLSXParser(self.file)
+                    output = excel.extract_xlsx()
+                    if isinstance(output, str):
+                        plot = draw(output, self.size)
+                        plot.WC()
+                        plot.count_plot()
+                    elif isinstance(output, list):
+                        plot = draw(output[0], self.size)
+                        plot.WC()
+                        plot.count_plot()
+                    return output
+                elif not self.plots:
+                    excel = XLSXParser(self.file)
+                    output = excel.extract_xlsx()
+                    return output
 
         elif ext == "DOCX":
             if isinstance(self.file, str):
-                docx = DOCXParser(self.file)
-                output = docx.extract_docx()
-                return output
+                if self.plots:
+                    docx = DOCXParser(self.file)
+                    output = docx.extract_docx()
+                    if isinstance(output, str):
+                        plot = draw(output, self.size)
+                        plot.WC()
+                        plot.count_plot()
+                    elif isinstance(output, list):
+                        plot = draw(output[0], self.size)
+                        plot.WC()
+                        plot.count_plot()
+                    return output
+                elif not self.plots:
+                    docx = DOCXParser(self.file)
+                    output = docx.extract_docx()
+                    return output
 
-        elif ext == "JPG":
+        elif ext == "JPG" and not "GIF":
             if self.insights:
                 if self.plots:
                     image = generate_insights(self.file, df)
@@ -109,6 +189,30 @@ class extract:
                     image = ImageParser(self.file)
                     output = image.extract_image()
                     return output_df, output
+        elif ext == "GIF":
+            if self.insights:
+                if self.plots:
+                    image = ImageParser(self.file)
+                    output = image.extract_image()
+                    output_df = pd.DataFrame()
+                    if isinstance(output, list):
+                        plot = draw(output[0], self.size)
+                        plot.WC()
+                        plot.count_plot()
+                    elif isinstance(output, str):
+                        plot = draw(output, self.size)
+                        plot.WC()
+                        plot.count_plot()
+                    return output_df, output
+                elif not self.plots:
+                    image = ImageParser(self.file)
+                    output = image.extract_image()
+                    output_df = pd.DataFrame()
+                    return output_df, output
+            elif not self.insights:
+                image = ImageParser(self.file)
+                output = image.extract_image()
+                return output
 
             elif not self.insights:
                 if self.plots:

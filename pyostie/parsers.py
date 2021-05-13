@@ -164,10 +164,10 @@ class PDFParser:
             if self.insights:
                 df_list = []
                 pdffile = self.file
-                os.mkdir("tempdir")
                 tempdir = "tempdir/"
                 if os.path.isdir(tempdir):
                     shutil.rmtree(tempdir)
+                os.mkdir("tempdir")
                 os.mkdir("tempdir/converted_files")
                 images = convert_from_path(pdffile)
                 converted_files = tempdir + "converted_files/"
