@@ -13,8 +13,8 @@ except Exception:
     stopwords = nltk.corpus.stopwords.words('english')
 words = set(nltk.corpus.words.words('en'))
 
-extensions = {"jpeg": "jpg", "tiff":"jpg", "tif": "jpg", "png": "jpg",
-              "gif": "jpg","":"txt", "log":"txt", "xls": "xlsx", "mp3":"wav"}
+extensions = {"jpeg": "jpg", "tiff": "jpg", "tif": "jpg", "png": "jpg", "": "txt", "log": "txt", "xls": "xlsx",
+              "mp3": "wav"}
 
 
 def process_files(file_list, output_path, folder_name):
@@ -82,6 +82,7 @@ def extension_type_check(extension, input_type):
     -------
     The extension with uppercase is returned.
     """
+
     def decorator(function):
         def wrapper(args):
             if isinstance(args, input_type):
@@ -89,7 +90,9 @@ def extension_type_check(extension, input_type):
                 return extnsn.upper()
             else:
                 print("Bad input type.")
+
         return wrapper
+
     return decorator
 
 
