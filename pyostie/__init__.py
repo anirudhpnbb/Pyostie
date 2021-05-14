@@ -1,5 +1,3 @@
-import pandas as pd
-
 from pyostie.parsers import *
 from pyostie.insights_ext import *
 from pyostie.convert import *
@@ -11,14 +9,21 @@ class extract:
 
     def __init__(self, filename, insights=False, tess_path=None, extension=None, plotting=True, figsize=None):
         """
-        :param filename:
-        :param insights:
-        :param tess_path:
-        :param extension:
-        :param plotting:
-        :param figsize:
 
-        :return:
+        Parameters
+        ----------
+        filename :  The file that needs to be processed with path.
+                    Example:
+                        - "path_to_the_file_sample.jpg"
+        insights : False by default, True if the user requires the insights dataframe.
+        tess_path : Only for windows users, "Path_to_the_tesseract.cmd".
+        extension : Extension of the file that needs to be processed.
+                    Example:
+                        - "jpg", "tif", "txt", "csv", "pdf", "png", "pptx", "xlsx"
+        plotting : True by default. False can be given if the user doesn't require the plots.
+        figsize : Size of the plot.
+                    Example:
+                        - (20, 14)
         """
         self.file = filename
         self.insights = insights
@@ -31,7 +36,11 @@ class extract:
     def start(self):
         """
 
-        :return: Main function to start the process.
+        Returns
+        -------
+         The main function to start the process. Returns a dataframe and a string/list of continuous
+        text if insights=True, else if insights=False, only the string/list of text is returned.
+
         """
 
         @extension_type_check(self.ext, str)

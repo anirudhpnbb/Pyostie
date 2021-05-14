@@ -28,14 +28,18 @@ class DOCXParser:
     def __init__(self, filename):
         """
 
-        :param filename:
+        Parameters
+        ----------
+        filename : The file that needs to be processed.
         """
         self.file = filename
 
     def extract_docx(self):
         """
 
-        :return:
+        Returns
+        -------
+        DOCXParser for Docx files.
         """
         output = docx2txt.process(self.file)
         return output
@@ -46,14 +50,18 @@ class XLSXParser:
     def __init__(self, filename):
         """
 
-        :param filename:
+        Parameters
+        ----------
+        filename : The file that needs to be processed.
         """
         self.file = filename
 
     def extract_xlsx(self):
         """
 
-        :return:
+        Returns
+        -------
+        XLSXParser for XLSX and XLS files.
         """
         out_list = []
         book = xlrd.open_workbook(self.file)
@@ -70,7 +78,10 @@ class CSVParser:
     def __init__(self, filename, delimiter=','):
         """
 
-        :param filename:
+        Parameters
+        ----------
+        filename : The file that needs to be processed.
+        delimiter : By default ','. Can be changed if any other delimiter is needed.
         """
         self.file = filename
         self.delimiter = delimiter
@@ -78,7 +89,9 @@ class CSVParser:
     def extract_csv(self):
         """
 
-        :return:
+        Returns
+        -------
+        CSVParser for csv files.
         """
         with open(self.file) as file:
             output = csv.reader(file, delimiter=self.delimiter)
@@ -90,8 +103,10 @@ class ImageParser:
     def __init__(self, filename, tess_path=None):
         """
 
-        :param filename:
-        :param tess_path
+        Parameters
+        ----------
+        filename : The file that needs to be processed.
+        tess_path : The path to the tesseract cmd (Only for windows.)
         """
         self.file = filename
         self.path = tess_path
@@ -99,7 +114,10 @@ class ImageParser:
     def extract_image(self):
         """
 
-        :return:
+        Returns
+        -------
+        ImageParser for Image formats.
+
         """
         out_list = []
         if self.path is not None:
@@ -115,15 +133,14 @@ class ImageParser:
 
 
 class PDFParser:
-    """
-
-    """
 
     def __init__(self, filename, insights=False):
         """
 
-        :param filename:
-        :param insights:
+        Parameters
+        ----------
+        filename : The file that needs to be processed.
+        insights : True by default. False if the dataframe is not needed.
         """
         self.file = filename
         self.insights = insights
@@ -131,10 +148,11 @@ class PDFParser:
     def extract_pypdf2(self):
         """
 
-        :param kwargs:
-        :return:
-        """
+        Returns
+        -------
+        PDFParser for pdf files.
 
+        """
         contents = []
         text = ' '
         pdfFileObj = open(self.file, 'rb')
@@ -192,7 +210,9 @@ class PDFParser:
     def extract_pdfplumber(self):
         """
 
-        :return:
+        Returns
+        -------
+        Works as an alternative for PyPDF2.
         """
         out_list = []
         with pdfplumber.open(self.file) as pdf:
@@ -208,14 +228,18 @@ class TXTParser:
     def __init__(self, filename):
         """
 
-        :param filename:
+        Parameters
+        ----------
+        filename : The file that needs to be processed.
         """
         self.file = filename
 
     def extract_txt(self):
         """
 
-        :return:
+        Returns
+        -------
+        TXTParser for txt, log or no extension files.
         """
         with open(self.file) as file:
             return file.read()
@@ -226,13 +250,18 @@ class PPTXParser:
     def __init__(self, filename):
         """
 
-        :param filename:
+        Parameters
+        ----------
+        filename : The file that needs to be processed.
         """
         self.file = filename
 
     def extract_pptx(self):
         """
-        :return:
+
+        Returns
+        -------
+        PPTXParser for pptx files.
         """
         text = []
         paper = Presentation(self.file)
@@ -251,13 +280,19 @@ class speech_to_text:
 
     def __init__(self, filename):
         """
-        :param filename:
+
+        Parameters
+        ----------
+        filename : The file that needs to be processed.
         """
         self.file = filename
 
     def extract_audio(self):
         """
-        :return:
+
+        Returns
+        -------
+        speech_to_text for mp3, wav files.
         """
         output_audio = []
         os.mkdir("tempdir")

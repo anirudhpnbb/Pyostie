@@ -17,10 +17,23 @@ words = set(nltk.corpus.words.words('en'))
 
 class draw:
     def __init__(self, text, figsize=None):
+        """
+
+        Parameters
+        ----------
+        text : The text input for the plots. text is the output of the file processed.
+        figsize : The size of the plots required.
+        """
         self.text = text
         self.size = figsize
 
     def WC(self):
+        """
+
+        Returns
+        -------
+        A wordcloud with the text as input.
+        """
         plt.figure(figsize=self.size)
         if isinstance(self.text, str):
             cleaned_text = cleaning_text(self.text)
@@ -42,6 +55,12 @@ class draw:
             plt.show()
 
     def count_plot(self):
+        """
+
+        Returns
+        -------
+        A count plot of all the words.
+        """
         plt.figure(figsize=self.size)
         if isinstance(self.text, str):
             cleaned_text = cleaning_text(self.text)
