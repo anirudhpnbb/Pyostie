@@ -96,21 +96,60 @@ class extract:
 
         elif ext == "TXT":
             if isinstance(self.file, str):
-                txt = TXTParser(self.file)
-                output = txt.extract_txt()
-                return output
+                if self.plots:
+                    txt = TXTParser(self.file)
+                    output = txt.extract_txt()
+                    if isinstance(output, str):
+                        plot = draw(output, self.size)
+                        plot.WC()
+                        plot.count_plot()
+                    elif isinstance(output, list):
+                        plot = draw(output[0], self.size)
+                        plot.WC()
+                        plot.count_plot()
+                    return output
+                elif not self.plots:
+                    txt = TXTParser(self.file)
+                    output = txt.extract_txt()
+                    return output
 
         elif ext == "XLSX":
             if isinstance(self.file, str):
-                excel = XLSXParser(self.file)
-                output = excel.extract_xlsx()
-                return output
+                if self.plots:
+                    excel = XLSXParser(self.file)
+                    output = excel.extract_xlsx()
+                    if isinstance(output, str):
+                        plot = draw(output, self.size)
+                        plot.WC()
+                        plot.count_plot()
+                    elif isinstance(output, list):
+                        plot = draw(output[0], self.size)
+                        plot.WC()
+                        plot.count_plot()
+                    return output
+                elif not self.plots:
+                    excel = XLSXParser(self.file)
+                    output = excel.extract_xlsx()
+                    return output
 
         elif ext == "DOCX":
             if isinstance(self.file, str):
-                docx = DOCXParser(self.file)
-                output = docx.extract_docx()
-                return output
+                if self.plots:
+                    docx = DOCXParser(self.file)
+                    output = docx.extract_docx()
+                    if isinstance(output, str):
+                        plot = draw(output, self.size)
+                        plot.WC()
+                        plot.count_plot()
+                    elif isinstance(output, list):
+                        plot = draw(output[0], self.size)
+                        plot.WC()
+                        plot.count_plot()
+                    return output
+                elif not self.plots:
+                    docx = DOCXParser(self.file)
+                    output = docx.extract_docx()
+                    return output
 
         elif ext == "JPG":
             if self.insights:
@@ -137,7 +176,7 @@ class extract:
         elif ext == "GIF":
             if self.insights:
                 if self.plots:
-                    image = ImageParser(self.file, self.path)
+                    image = ImageParser(self.file, tess_path=self.path)
                     output = image.extract_image()
                     output_df = pd.DataFrame()
                     if isinstance(output, list):
@@ -150,18 +189,18 @@ class extract:
                         plot.count_plot()
                     return output_df, output
                 elif not self.plots:
-                    image = ImageParser(self.file, self.path)
+                    image = ImageParser(self.file, tess_path=self.path)
                     output = image.extract_image()
                     output_df = pd.DataFrame()
                     return output_df, output
             elif not self.insights:
-                image = ImageParser(self.file, self.path)
+                image = ImageParser(self.file, tess_path=self.path)
                 output = image.extract_image()
                 return output
 
             elif not self.insights:
                 if self.plots:
-                    image = ImageParser(self.file, self.path)
+                    image = ImageParser(self.file, tess_path=self.path)
                     output = image.extract_image()
                     if isinstance(output, str):
                         plot = draw(output)
@@ -173,16 +212,41 @@ class extract:
                         plot.count_plot()
                     return output
                 elif not self.plots:
-                    image = ImageParser(self.file, self.path)
+                    image = ImageParser(self.file, tess_path=self.path)
                     output = image.extract_image()
                     return output
 
         elif ext == "PPTX":
-            pptx = PPTXParser(self.file)
-            output = pptx.extract_pptx()
-            return output
+            if self.plots:
+                pptx = PPTXParser(self.file)
+                output = pptx.extract_pptx()
+                if isinstance(output, str):
+                    plot = draw(output, self.size)
+                    plot.WC()
+                    plot.count_plot()
+                elif isinstance(output, list):
+                    plot = draw(output[0], self.size)
+                    plot.WC()
+                    plot.count_plot()
+                return output
+            elif not self.plots:
+                pptx = PPTXParser(self.file)
+                output = pptx.extract_pptx()
 
         elif ext == "WAV":
-            wav = speech_to_text(self.file)
-            output = wav.extract_audio()
-            return output
+            if self.plots:
+                wav = speech_to_text(self.file)
+                output = wav.extract_audio()
+                if isinstance(output, str):
+                    plot = draw(output, self.size)
+                    plot.WC()
+                    plot.count_plot()
+                elif isinstance(output, list):
+                    plot = draw(output[0], self.size)
+                    plot.WC()
+                    plot.count_plot()
+                return output
+            elif not self.plots:
+                wav = speech_to_text(self.file)
+                output = wav.extract_audio()
+                return output
