@@ -117,7 +117,7 @@ class extract:
                 if self.plots:
                     image = generate_insights(self.file, df)
                     output_df = image.generate_df()
-                    image = ImageParser(self.file)
+                    image = ImageParser(filename=self.file, tess_path=self.path)
                     output = image.extract_image()
                     if isinstance(output, str):
                         plot = draw(output, self.size)
@@ -131,13 +131,37 @@ class extract:
                 elif not self.plots:
                     image = generate_insights(self.file, df)
                     output_df = image.generate_df()
-                    image = ImageParser(self.file)
+                    image = ImageParser(filename=self.file, tess_path=self.path)
                     output = image.extract_image()
                     return output_df, output
+        elif ext == "GIF":
+            if self.insights:
+                if self.plots:
+                    image = ImageParser(self.file, self.path)
+                    output = image.extract_image()
+                    output_df = pd.DataFrame()
+                    if isinstance(output, list):
+                        plot = draw(output[0], self.size)
+                        plot.WC()
+                        plot.count_plot()
+                    elif isinstance(output, str):
+                        plot = draw(output, self.size)
+                        plot.WC()
+                        plot.count_plot()
+                    return output_df, output
+                elif not self.plots:
+                    image = ImageParser(self.file, self.path)
+                    output = image.extract_image()
+                    output_df = pd.DataFrame()
+                    return output_df, output
+            elif not self.insights:
+                image = ImageParser(self.file, self.path)
+                output = image.extract_image()
+                return output
 
             elif not self.insights:
                 if self.plots:
-                    image = ImageParser(self.file)
+                    image = ImageParser(self.file, self.path)
                     output = image.extract_image()
                     if isinstance(output, str):
                         plot = draw(output)
@@ -149,7 +173,7 @@ class extract:
                         plot.count_plot()
                     return output
                 elif not self.plots:
-                    image = ImageParser(self.file)
+                    image = ImageParser(self.file, self.path)
                     output = image.extract_image()
                     return output
 
