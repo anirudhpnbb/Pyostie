@@ -13,3 +13,6 @@ pandas
 numpy
 pydub
 setuptools
+plotly
+wordcloud
+nltk
