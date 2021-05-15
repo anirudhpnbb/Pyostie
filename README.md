@@ -105,8 +105,9 @@ text = output.start()
 
 # For word files
 
+image_folder(optional): Address where image needs to be written
 ```python
-output = pyostie.extract(filename, extension="docx")
+output = pyostie.extract(filename, image_folder, extension="docx")
 text = output.start()
 ```
 
