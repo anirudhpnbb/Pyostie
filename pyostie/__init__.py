@@ -66,7 +66,7 @@ class extract:
 
         elif ext == "CSV":
             if isinstance(self.file, str):
-                csv_output = CSVParser(self.file, self.csv_delimiter)
+                csv_output = CSVParser(self.file,self.csv_delimiter)
                 output = csv_output.extract_csv()
                 return output
 
