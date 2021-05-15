@@ -67,9 +67,8 @@ class XLSXParser:
 
 class CSVParser:
 
-    def __init__(self, filename, delimiter=','):
+    def __init__(self, filename, delimiter):
         """
-
         :param filename:
         """
         self.file = filename
@@ -77,7 +76,6 @@ class CSVParser:
 
     def extract_csv(self):
         """
-
         :return:
         """
         with open(self.file) as file:
@@ -164,10 +162,10 @@ class PDFParser:
             if self.insights:
                 df_list = []
                 pdffile = self.file
+                os.mkdir("tempdir")
                 tempdir = "tempdir/"
                 if os.path.isdir(tempdir):
                     shutil.rmtree(tempdir)
-                os.mkdir("tempdir")
                 os.mkdir("tempdir/converted_files")
                 images = convert_from_path(pdffile)
                 converted_files = tempdir + "converted_files/"
