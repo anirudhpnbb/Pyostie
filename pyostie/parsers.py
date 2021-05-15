@@ -75,13 +75,14 @@ class XLSXParser:
 
 class CSVParser:
 
-    def __init__(self, filename, delimiter=','):
+    def __init__(self, filename, delimiter):
         """
 
         Parameters
         ----------
         filename : The file that needs to be processed.
         delimiter : By default ','. Can be changed if any other delimiter is needed.
+
         """
         self.file = filename
         self.delimiter = delimiter
@@ -92,6 +93,7 @@ class CSVParser:
         Returns
         -------
         CSVParser for csv files.
+
         """
         with open(self.file) as file:
             output = csv.reader(file, delimiter=self.delimiter)
@@ -182,10 +184,10 @@ class PDFParser:
             if self.insights:
                 df_list = []
                 pdffile = self.file
+                os.mkdir("tempdir")
                 tempdir = "tempdir/"
                 if os.path.isdir(tempdir):
                     shutil.rmtree(tempdir)
-                os.mkdir("tempdir")
                 os.mkdir("tempdir/converted_files")
                 images = convert_from_path(pdffile)
                 converted_files = tempdir + "converted_files/"
