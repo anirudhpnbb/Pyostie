@@ -7,7 +7,7 @@ from pyostie.plots import *
 
 class extract:
 
-    def __init__(self, filename, insights=False, tess_path=None, extension=None, plotting=True, figsize=None):
+    def __init__(self, filename, insights=False, tess_path=None, extension=None, plotting=True, figsize=None, csv_delimiter=','):
         """
         :param filename:
         :param insights:
@@ -24,6 +24,7 @@ class extract:
         self.ext = extension
         self.plots = plotting
         self.size = figsize
+        self.csv_delimiter=csv_delimiter
 
     # noinspection PyBroadException
     def start(self):
@@ -65,7 +66,7 @@ class extract:
 
         elif ext == "CSV":
             if isinstance(self.file, str):
-                csv_output = CSVParser(self.file)
+                csv_output = CSVParser(self.file,self.csv_delimiter)
                 output = csv_output.extract_csv()
                 return output
 
