@@ -69,7 +69,6 @@ class CSVParser:
 
     def __init__(self, filename, delimiter):
         """
-
         :param filename:
         """
         self.file = filename
@@ -77,7 +76,6 @@ class CSVParser:
 
     def extract_csv(self):
         """
-
         :return:
         """
         with open(self.file) as file:

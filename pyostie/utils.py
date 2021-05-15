@@ -13,7 +13,8 @@ except Exception:
     stopwords = nltk.corpus.stopwords.words('english')
 words = set(nltk.corpus.words.words('en'))
 
-extensions = {"jpeg": "jpg", "tiff":"jpg", "tif": "jpg", "png": "jpg", "":"txt", "log":"txt", "xls": "xlsx", "mp3":"wav"}
+extensions = {"jpeg": "jpg", "tiff":"jpg", "tif": "jpg", "png": "jpg",
+              "gif": "jpg","":"txt", "log":"txt", "xls": "xlsx", "mp3":"wav"}
 
 
 def process_files(file_list, output_path, folder_name):
