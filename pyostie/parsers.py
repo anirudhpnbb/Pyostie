@@ -67,7 +67,7 @@ class XLSXParser:
 
 class CSVParser:
 
-    def __init__(self, filename, delimiter=','):
+    def __init__(self, filename, delimiter):
         """
 
         :param filename:
