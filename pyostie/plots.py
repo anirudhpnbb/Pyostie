@@ -12,7 +12,6 @@ try:
 except Exception:
     nltk.download('stopwords')
     stopwords = nltk.corpus.stopwords.words('english')
-words = set(nltk.corpus.words.words('en'))
 
 
 class draw:
