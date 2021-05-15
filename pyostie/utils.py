@@ -11,11 +11,6 @@ try:
 except Exception:
     nltk.download('stopwords')
     stopwords = nltk.corpus.stopwords.words('english')
-try:
-    words = set(nltk.corpus.words.words('en'))
-except Exception:
-    nltk.download("words")
-    words = set(nltk.corpus.words.words('en'))
 
 extensions = {"jpeg": "jpg", "tiff": "jpg", "tif": "jpg", "png": "jpg", "": "txt", "log": "txt", "xls": "xlsx",
               "mp3": "wav"}
@@ -141,8 +136,4 @@ def cleaning_text(text_to_clean):
     text = text.replace(",", " ")
     text = text.replace("’", " ")
     text = text.replace("-", " ")
-    text = " ".join([word for word in nltk.wordpunct_tokenize(text) if
-                     word.lower() in words or not word.isalpha() or not word.isnumeric()])
-    row_words = text.split(' ')
-    row_words = [word for word in row_words if word.lower() not in stopwords]
-    return ' '.join(row_words)
+    return text
