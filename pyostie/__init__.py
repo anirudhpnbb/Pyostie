@@ -8,7 +8,7 @@ from pyostie.plots import *
 class extract:
 
     def __init__(self, filename, insights=False, tess_path=None, extension=None,
-                 plotting=True, figsize=None, csv_delimiter=","):
+                 plotting=True, figsize=None, img_dir=None, csv_delimiter=","):
         """
         :param filename:
         :param insights:
@@ -25,6 +25,7 @@ class extract:
         self.plots = plotting
         self.size = figsize
         self.delimiter = csv_delimiter
+        self.img_dir = img_dir
 
     # noinspection PyBroadException
     def start(self):
@@ -96,7 +97,7 @@ class extract:
 
         elif ext == "DOCX":
             if isinstance(self.file, str):
-                docx = DOCXParser(self.file)
+                docx = DOCXParser(self.file, self.img_dir)
                 output = docx.extract_docx()
                 return output
 
