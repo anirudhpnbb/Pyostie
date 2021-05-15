@@ -11,7 +11,11 @@ try:
 except Exception:
     nltk.download('stopwords')
     stopwords = nltk.corpus.stopwords.words('english')
-words = set(nltk.corpus.words.words('en'))
+try:
+    words = set(nltk.corpus.words.words('en'))
+except Exception:
+    nltk.download("words")
+    words = set(nltk.corpus.words.words('en'))
 
 extensions = {"jpeg": "jpg", "tiff": "jpg", "tif": "jpg", "png": "jpg", "": "txt", "log": "txt", "xls": "xlsx",
               "mp3": "wav"}
