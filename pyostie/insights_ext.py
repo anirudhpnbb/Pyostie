@@ -14,15 +14,22 @@ class generate_insights:
     def __init__(self, filename, data):
         """
 
-        :param filename: Input the filename as string.
-        :param data: Input an empty dataframe.
+        Parameters
+        ----------
+        filename : The file that needs to be processed.
+        data : Dataframe to process the insights.
         """
         self.file = filename
         self.data = data
 
     def generate_df(self):
         """
-        :return:
+
+        Returns
+        -------
+        A dataframe of insights with word coordinates, para num, line num,
+         word num, word height, word width, image height, image width etc.,
+
         """
         top_plus_height = []
         left_plus_width = []
