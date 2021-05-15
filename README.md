@@ -1,6 +1,5 @@
 <!-- PROJECT SHIELDS -->
 [![Upload Python Package](https://github.com/anirudhpnbb/Pyostie/actions/workflows/python-publish.yml/badge.svg?branch=2.4.5)](https://github.com/anirudhpnbb/Pyostie/actions/workflows/python-publish.yml)
-[![Python package](https://github.com/anirudhpnbb/Pyostie/actions/workflows/python-package.yml/badge.svg?branch=main)](https://github.com/anirudhpnbb/Pyostie/actions/workflows/python-package.yml)
 [![release](https://img.shields.io/github/release/anirudhpnbb/Pyostie)](https://img.shields.io/github/release/anirudhpnbb/Pyostie)
 <img src="https://img.shields.io/github/contributors/anirudhpnbb/Pyostie"/>
 <img src="https://img.shields.io/github/stars/anirudhpnbb/Pyostie?style=flat"/>
