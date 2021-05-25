@@ -6,6 +6,7 @@ pytesseract
 PyPDF2
 pdfplumber
 python-pptx
+scikit-build
 opencv-python
 Pillow
 ffmpeg
