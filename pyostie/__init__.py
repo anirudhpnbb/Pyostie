@@ -95,6 +95,26 @@ class extract:
                     output = csv_output.extract_csv()
                     return output
 
+        elif ext == "TSV":
+            self.delimiter = "\t"
+            if isinstance(self.file, str):
+                if self.plots:
+                    csv_output = CSVParser(self.file, self.delimiter)
+                    output = csv_output.extract_csv()
+                    if isinstance(output, str):
+                        plot = draw(output, self.size)
+                        plot.WC()
+                        plot.count_plot()
+                    elif isinstance(output, list):
+                        plot = draw(output[0], self.size)
+                        plot.WC()
+                        plot.count_plot()
+                    return output
+                elif not self.plots:
+                    csv_output = CSVParser(self.file, self.delimiter)
+                    output = csv_output.extract_csv()
+                    return output
+
         elif ext == "TXT":
             if isinstance(self.file, str):
                 if self.plots:
