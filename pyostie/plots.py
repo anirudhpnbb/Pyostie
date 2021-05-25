@@ -36,6 +36,9 @@ class draw:
         -------
         A wordcloud with the text as input.
         """
+
+        print("Generating Plots....")
+
         plt.figure(figsize=self.size)
         if isinstance(self.text, str):
             cleaned_text = cleaning_text(self.text)

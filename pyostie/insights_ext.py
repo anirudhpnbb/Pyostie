@@ -1,9 +1,16 @@
-import pytesseract
-from pytesseract import Output
 import cv2
-import pandas as pd
-import numpy as np
+import pytesseract
 from PIL import Image
+from pytesseract import Output
+from pkgutil import find_loader
+
+pandas_installed = find_loader("pandas") is not None
+if pandas_installed:
+    import pandas as pd
+
+numpy_installed = find_loader("numpy") is not None
+if numpy_installed:
+    import numpy as np
 
 
 df = pd.DataFrame()
@@ -31,6 +38,9 @@ class generate_insights:
          word num, word height, word width, image height, image width etc.,
 
         """
+
+        print("Fetching insights....")
+
         top_plus_height = []
         left_plus_width = []
         img = cv2.imread(self.file)

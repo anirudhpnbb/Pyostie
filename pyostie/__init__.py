@@ -1,4 +1,11 @@
-from pyostie.parsers import *
+from pyostie.csv_extract import *
+from pyostie.pdf import *
+from pyostie.docx import *
+from pyostie.excel import *
+from pyostie.image import *
+from pyostie.pptx import *
+from pyostie.speechtotext import *
+from pyostie.text import *
 from pyostie.insights_ext import *
 from pyostie.convert import *
 from pyostie.utils import *
@@ -45,12 +52,27 @@ class extract:
 
         """
 
+        print("Process started....")
+        print("_________________________________")
+
         @extension_type_check(self.ext, str)
         def ext_type_check(extnsn):
             return extnsn
 
         ext = ext_type_check(self.ext)
-        print(ext)
+
+        if ext.upper() == "JPG" or ext.upper() == "GIF":
+            print("Image file found....")
+        elif ext.upper() == "PDF":
+            print("PDF file found....")
+        elif ext.upper() == "PPTX" or ext.upper() == "DOCX" or ext.upper() == "XLSX":
+            print("Office file found....")
+        elif ext.upper() == "CSV" or ext.upper() == "TSV" or ext.upper() == "TXT":
+            print("ASCII file found....")
+        else:
+            print("File found....")
+
+        print("_________________________________")
 
         if ext.upper() == "PDF":
             if isinstance(self.file, str):
