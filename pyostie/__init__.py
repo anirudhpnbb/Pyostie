@@ -79,8 +79,8 @@ class extract:
                 try:
                     if self.insights:
                         if self.plots:
-                            pdf = PDFParser(self.file, insights=self.insights)
-                            output_df, output = pdf.extract_pypdf2()
+                            pdf_file = PDFParser(self.file, insights=self.insights)
+                            output_df, output = pdf_file.extract_pypdf2()
                             if isinstance(output, str):
                                 plot = draw(output, self.size)
                                 plot.WC()
@@ -91,13 +91,13 @@ class extract:
                                 plot.count_plot()
                             return output_df, output
                         elif not self.plots:
-                            pdf = PDFParser(self.file, insights=self.insights)
-                            output_df, output = pdf.extract_pypdf2()
+                            pdf_file = PDFParser(self.file, insights=self.insights)
+                            output_df, output = pdf_file.extract_pypdf2()
                             return output_df, output
                     elif not self.insights:
                         if self.plots:
-                            pdf = PDFParser(self.file, insights=self.insights)
-                            output_df, output = pdf.extract_pypdf2()
+                            pdf_file = PDFParser(self.file, insights=self.insights)
+                            output_df, output = pdf_file.extract_pypdf2()
                             if isinstance(output, str):
                                 plot = draw(output, self.size)
                                 plot.WC()
@@ -108,15 +108,15 @@ class extract:
                                 plot.count_plot()
                             return output_df, output
                         elif not self.plots:
-                            pdf = PDFParser(self.file, insights=self.insights)
-                            output_df, output = pdf.extract_pypdf2()
+                            pdf_file = PDFParser(self.file, insights=self.insights)
+                            output_df, output = pdf_file.extract_pypdf2()
                             return output_df, output
                 except Exception:
                     try:
                         if self.insights:
                             if self.plots:
-                                pdf = PDFParser(self.file)
-                                output_df, output = pdf.extract_pdfplumber()
+                                pdf_file = PDFParser(self.file)
+                                output_df, output = pdf_file.extract_pdfplumber()
                                 if isinstance(output, str):
                                     plot = draw(output, self.size)
                                     plot.WC()
@@ -127,13 +127,13 @@ class extract:
                                     plot.count_plot()
                                 return output_df, output
                             elif not self.plots:
-                                pdf = PDFParser(self.file)
-                                output_df, output = pdf.extract_pdfplumber()
+                                pdf_file = PDFParser(self.file)
+                                output_df, output = pdf_file.extract_pdfplumber()
                                 return output_df, output
                         elif not self.insights:
                             if self.plots:
-                                pdf = PDFParser(self.file)
-                                output = pdf.extract_pdfplumber()
+                                pdf_file = PDFParser(self.file)
+                                output = pdf_file.extract_pdfplumber()
                                 if isinstance(output, str):
                                     plot = draw(output, self.size)
                                     plot.WC()
@@ -144,8 +144,8 @@ class extract:
                                     plot.count_plot()
                                 return output
                             elif not self.plots:
-                                pdf = PDFParser(self.file)
-                                output = pdf.extract_pdfplumber()
+                                pdf_file = PDFParser(self.file)
+                                output = pdf_file.extract_pdfplumber()
                                 return output
                     except Exception as ex:
                         raise ex

@@ -40,6 +40,7 @@ class generate_insights:
         """
 
         print("Fetching insights....")
+        print("_________________________________")
 
         top_plus_height = []
         left_plus_width = []

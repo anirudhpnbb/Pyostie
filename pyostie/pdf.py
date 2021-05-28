@@ -66,13 +66,15 @@ class PDFParser:
             if self.insights:
                 df_list = []
                 pdffile = self.file
-                os.mkdir("tempdir")
-                tempdir = "tempdir/"
+                tempdir = "tempdir"
+                if not os.path.isdir(tempdir):
+                    os.mkdir(tempdir)
                 if os.path.isdir(tempdir):
                     shutil.rmtree(tempdir)
-                os.mkdir("tempdir/converted_files")
+                os.mkdir(tempdir)
+                os.mkdir(tempdir + "/converted_files")
                 images = convert_from_path(pdffile)
-                converted_files = tempdir + "converted_files/"
+                converted_files = tempdir + "/converted_files/"
                 for val in range(len(images)):
                     images[val - 1].save(converted_files + str(val) + ".jpg", "JPEG")
                 jpgfiles = os.listdir(converted_files)
