@@ -8,14 +8,6 @@ Pyostie.egg-info/requires.txt
 Pyostie.egg-info/top_level.txt
 pyostie/__init__.py
 pyostie/convert.py
-pyostie/csv_extract.py
-pyostie/docx.py
-pyostie/excel.py
-pyostie/image.py
 pyostie/insights_ext.py
-pyostie/pdf.py
-pyostie/plots.py
-pyostie/pptx.py
-pyostie/speechtotext.py
-pyostie/text.py
+pyostie/parsers.py
 pyostie/utils.py

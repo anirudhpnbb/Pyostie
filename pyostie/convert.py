@@ -7,18 +7,14 @@ class conversion:
     def __init__(self, filename):
         """
 
-        Parameters
-        ----------
-        filename : The file that needs to be processed.
+        :param output_list:
         """
         self.file = filename
 
     def convert(self):
         """
 
-        Returns
-        -------
-        Converts a single page pdf file to image and proceeds to process further.
+        :return:
         """
         if self.file[-3::].upper() == "PDF":
             pages = convert_from_path(self.file, 500)

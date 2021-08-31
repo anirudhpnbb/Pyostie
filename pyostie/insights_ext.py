@@ -1,16 +1,9 @@
-import cv2
 import pytesseract
-from PIL import Image
 from pytesseract import Output
-from pkgutil import find_loader
-
-pandas_installed = find_loader("pandas") is not None
-if pandas_installed:
-    import pandas as pd
-
-numpy_installed = find_loader("numpy") is not None
-if numpy_installed:
-    import numpy as np
+import cv2
+import pandas as pd
+import numpy as np
+from PIL import Image
 
 
 df = pd.DataFrame()
@@ -21,27 +14,16 @@ class generate_insights:
     def __init__(self, filename, data):
         """
 
-        Parameters
-        ----------
-        filename : The file that needs to be processed.
-        data : Dataframe to process the insights.
+        :param filename: Input the filename as string.
+        :param data: Input an empty dataframe.
         """
         self.file = filename
         self.data = data
 
     def generate_df(self):
         """
-
-        Returns
-        -------
-        A dataframe of insights with word coordinates, para num, line num,
-         word num, word height, word width, image height, image width etc.,
-
+        :return:
         """
-
-        print("Fetching insights....")
-        print("_________________________________")
-
         top_plus_height = []
         left_plus_width = []
         img = cv2.imread(self.file)
