@@ -50,13 +50,13 @@ class generate_insights:
         self.data["top_plus_height"] = top_plus_height
         self.data["left_plus_width"] = left_plus_width
         self.data['topLeft'] = tuple(self.data[['left', 'top']].
-                                     apply(lambda x: ','.join(x.fillna('').map(int)), axis=1))
+                                     apply(lambda x: ','.join(x.fillna('').map(str)), axis=1))
         self.data['bottomLeft'] = tuple(self.data[['left', 'top_plus_height']].
-                                        apply(lambda x: ','.join(x.fillna('').map(int)), axis=1))
+                                        apply(lambda x: ','.join(x.fillna('').map(str)), axis=1))
         self.data['bottomRight'] = tuple(self.data[['left_plus_width', 'top_plus_height']].
-                                         apply(lambda x: ','.join(x.fillna('').map(int)), axis=1))
+                                         apply(lambda x: ','.join(x.fillna('').map(str)), axis=1))
         self.data['topRight'] = tuple(self.data[['left_plus_width', 'top']].
-                                      apply(lambda x: ','.join(x.fillna('').map(int)), axis=1))
+                                      apply(lambda x: ','.join(x.fillna('').map(str)), axis=1))
         # self.data['topLeft'] = self.data['topLeft'].str.strip(',')
         # self.data['bottomLeft'] = self.data['bottomLeft'].str.strip(',')
         # self.data['bottomRight'] = self.data['bottomRight'].str.strip(',')
