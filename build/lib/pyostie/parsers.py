@@ -39,12 +39,13 @@ class DOCXParser:
 
 class XLSXParser:
 
-    def __init__(self, filename):
+    def __init__(self, filename, sheet_name=None):
         """
 
         :param filename:
         """
         self.file = filename
+        self.sheet = sheet_name
 
     def extract_xlsx(self):
         """
@@ -53,12 +54,19 @@ class XLSXParser:
         """
         out_list = []
         book = xlrd.open_workbook(self.file)
-        for val in range(len(book.sheet_names())):
-            sheet = book.sheet_by_index(val)
+        if self.sheet is None:
+            for val in range(len(book.sheet_names())):
+                sheet = book.sheet_by_index(val)
+                for res in range(sheet.nrows):
+                    output = " " + " ".join(str(val_) for val_ in (sheet.row_values(res)))
+                    out_list.append(output)
+            return out_list
+        elif self.sheet is not None:
+            sheet = book.sheet_by_name(self.sheet)
             for res in range(sheet.nrows):
                 output = " " + " ".join(str(val_) for val_ in (sheet.row_values(res)))
                 out_list.append(output)
-        return out_list
+            return out_list
 
 
 class CSVParser:
