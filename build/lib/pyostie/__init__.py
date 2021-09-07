@@ -6,7 +6,7 @@ from pyostie.utils import *
 
 class extract:
 
-    def __init__(self, filename, insights=False, tess_path=None, extension=None):
+    def __init__(self, filename, insights=False, tess_path=None, extension=None, sheet_name=None):
         """
         :param filename:
         :param insights:
@@ -19,6 +19,7 @@ class extract:
         self.insights = insights
         self.path = tess_path
         self.ext = extension
+        self.sheet = sheet_name
 
     # noinspection PyBroadException
     def start(self):
@@ -78,7 +79,7 @@ class extract:
 
         elif ext.upper() == "XLSX":
             if isinstance(self.file, str):
-                excel = XLSXParser(self.file)
+                excel = XLSXParser(filename=self.file, sheet_name=self.sheet)
                 output = excel.extract_xlsx()
                 return output
 
