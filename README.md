@@ -122,5 +122,6 @@ In this version, we can only extract text from PDFs, Excel, TXT, CSV and MP3 for
 ## Contact
 
 Anirudh Palaparthi - [@anirudh8889](https://twitter.com/anirudh8889) - [pnbbanirudh](https://www.linkedin.com/in/pnbbanirudh/) - aniruddhapnbb@gmail.com
+Balaram Guddanti - [Balaram Guddanti](https://www.linkedin.com//in/balaram-guddanti) - balaram.guddanti6@gmail.com
 
 Project Link: [PYOSTIE](https://github.com/anirudhpnbb/Pyostie)
