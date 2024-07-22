@@ -1,113 +1,105 @@
-from pyostie.parsers import *
-from pyostie.insights_ext import *
-from pyostie.convert import *
-from pyostie.utils import *
+#pyostie/__init__.py
+
+__version__ = "2.6.3"
+
+from pyostie.parsers import PDFParser, CSVParser, TXTParser, XLSXParser, DOCXParser, PPTXParser, ImageParser, SpeechToText
+from pyostie.insights_ext import GenerateInsights, data
+from typing import Union, Tuple, Optional, Any, Callable
 
 
-class extract:
+class Extract:
 
-    def __init__(self, filename, insights=False, tess_path=None, extension=None, sheet_name=None):
+    def __init__(self, filename: str, insights: bool = False, tess_path: Optional[str] = None, extension: Optional[str] = None, sheet_name: Optional[str] = None):
         """
-        :param filename:
-        :param insights:
-        :param tess_path:
-        :param extension:
+        Initialize the Extract class.
 
-        :return:
+        :param filename: Name of the file to process
+        :param insights: Boolean indicating whether to generate insights
+        :param tess_path: Path to Tesseract OCR
+        :param extension: File extension type
+        :param sheet_name: Sheet name for Excel files
         """
-        self.file = filename
-        self.insights = insights
-        self.path = tess_path
-        self.ext = extension
-        self.sheet = sheet_name
+        self.file: str = filename
+        self.insights: bool = insights
+        self.path: Optional[str] = tess_path
+        self.ext: Optional[str] = extension.upper() if extension else None
+        self.sheet: Optional[str] = sheet_name
 
-    # noinspection PyBroadException
-    def start(self):
+    def start(self) -> Union[Any, Tuple[Any, Any]]:
         """
+        Main function to start the process.
 
-        :return: Main function to start the process.
+        :return: Processed output based on file type
         """
-        print("Process started..... ")
+        print("Process started.....")
 
-        @extension_type_check(self.ext, str)
-        def ext_type_check(extnsn):
-            return extnsn
-        ext = ext_type_check(self.ext)
+        process_func = self._get_process_func()
+        if process_func:
+            return process_func()
+        else:
+            raise ValueError(f"Unsupported file extension: {self.ext}")
 
-        if ext.upper() == "JPG" or ext.upper() == "PNG" or ext.upper() == "TIF":
-            print("Image file found.....")
-            print("Processing the image file.....")
-        elif ext.upper() == "PDF":
-            print("PDF file found.....")
-            print("Processing the PDF file.....")
+    def _get_process_func(self) -> Optional[Callable[[], Union[Any, Tuple[Any, Any]]]]:
+        """
+        Map file extensions to their respective processing functions.
 
-        if ext.upper() == "PDF":
-            if isinstance(self.file, str):
-                try:
-                    if self.insights:
-                        pdf = PDFParser(self.file, insights=self.insights)
-                        output_df, output = pdf.extract_pypdf2()
-                        return output_df, output
-                    else:
-                        pdf = PDFParser(self.file, insights=self.insights)
-                        output = pdf.extract_pypdf2()
-                        return output
-                except Exception:
-                    try:
-                        if self.insights:
-                            pdf = PDFParser(self.file)
-                            output_df, output = pdf.extract_pdfplumber()
-                            return output_df, output
-                        else:
-                            pdf = PDFParser(self.file)
-                            output = pdf.extract_pdfplumber()
-                            return output
-                    except Exception as ex:
-                        raise ex
+        :return: Corresponding processing function
+        """
+        process_funcs = {
+            "PDF": self._process_pdf,
+            "CSV": self._process_csv,
+            "TXT": self._process_txt,
+            "XLSX": self._process_xlsx,
+            "DOCX": self._process_docx,
+            "PPTX": self._process_pptx,
+            "WAV": self._process_wav,
+            "JPG": self._process_image,
+            "PNG": self._process_image,
+            "TIF": self._process_image,
+        }
+        return process_funcs.get(self.ext)
 
-        elif ext.upper() == "CSV":
-            if isinstance(self.file, str):
-                csv_output = CSVParser(self.file)
-                output = csv_output.extract_csv()
-                return output
+    def _process_pdf(self) -> Union[Any, Tuple[Any, Any]]:
+        print("PDF file found.....")
+        print("Processing the PDF file.....")
+        parser = PDFParser(self.file, insights=self.insights)
+        try:
+            return parser.extract_pypdf2() if not self.insights else parser.extract_pypdf2()
+        except Exception:
+            return parser.extract_pdfplumber() if not self.insights else parser.extract_pdfplumber()
 
-        elif ext.upper() == "TXT":
-            if isinstance(self.file, str):
-                txt = TXTParser(self.file)
-                output = txt.extract_txt()
-                return output
+    def _process_csv(self) -> Any:
+        parser = CSVParser(self.file)
+        return parser.extract_csv()
 
-        elif ext.upper() == "XLSX":
-            if isinstance(self.file, str):
-                excel = XLSXParser(filename=self.file, sheet_name=self.sheet)
-                output = excel.extract_xlsx()
-                return output
+    def _process_txt(self) -> Any:
+        parser = TXTParser(self.file)
+        return parser.extract_txt()
 
-        elif ext.upper() == "DOCX":
-            if isinstance(self.file, str):
-                docx = DOCXParser(self.file)
-                output = docx.extract_docx()
-                return output
+    def _process_xlsx(self) -> Any:
+        parser = XLSXParser(filename=self.file, sheet_name=self.sheet)
+        return parser.extract_xlsx()
 
-        elif ext.upper() == "JPG" or ext.upper() == "PNG" or ext.upper() == "TIF":
-            if self.insights:
-                image = generate_insights(self.file, df)
-                output_df = image.generate_df()
-                image = ImageParser(self.file)
-                output = image.extract_image()
-                return output_df, output
+    def _process_docx(self) -> Any:
+        parser = DOCXParser(self.file)
+        return parser.extract_docx()
 
-            elif not self.insights:
-                image = ImageParser(self.file)
-                output = image.extract_image()
-                return output
+    def _process_pptx(self) -> Any:
+        parser = PPTXParser(self.file)
+        return parser.extract_pptx()
 
-        elif ext.upper() == "PPTX":
-            pptx = PPTXParser(self.file)
-            output = pptx.extract_pptx()
-            return output
+    def _process_wav(self) -> Any:
+        parser = SpeechToText(self.file)
+        return parser.extract_audio()
 
-        elif ext.upper() == "WAV":
-            wav = speech_to_text(self.file)
-            output = wav.extract_audio()
-            return output
+    def _process_image(self) -> Union[Any, Tuple[Any, Any]]:
+        self.data = data
+        if self.insights:
+            insights = GenerateInsights(self.file, self.data)
+            output_df = insights.generate_df()
+            parser = ImageParser(self.file)
+            output = parser.extract_image()
+            return output_df, output
+        else:
+            parser = ImageParser(self.file)
+            return parser.extract_image()

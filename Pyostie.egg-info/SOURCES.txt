@@ -11,3 +11,5 @@ pyostie/convert.py
 pyostie/insights_ext.py
 pyostie/parsers.py
 pyostie/utils.py
+tests/test_pyostie.py
+tests/tests_main.py

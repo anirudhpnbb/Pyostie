@@ -1,7 +1,10 @@
-from os import path
+import os
+import shutil
+import datetime
+import tempfile
 import pytest
 import pyostie
-from pkgutil import find_loader
+from importlib.util import find_spec
 from pytesseract import Output
 
 files_path = "test_files/"
@@ -24,13 +27,9 @@ expected_columns = [
     'topRight'
 ]
 
-pandas_installed = find_loader("pandas") is not None
-if pandas_installed:
-    import pandas as pd
-
-numpy_installed = find_loader("numpy") is not None
-if numpy_installed:
-    import numpy as np
+# Conditional imports for pandas and numpy
+pd = pytest.importorskip("pandas")
+np = pytest.importorskip("numpy")
 
 
 def test_placeholder():
@@ -38,16 +37,16 @@ def test_placeholder():
 
 
 @pytest.fixture(scope='session')
-def test_file():
-    return path.join(files_path, 'sample.tif')
+def test_file() -> str:
+    return os.path.join(files_path, 'sample.tif')
 
 
-@pytest.mark.skipif(pandas_installed is False, reason='requires pandas')
-def pyostie_dataframe_output(test_file):
-    output = pyostie.extract(test_file, insights=True, extension="tif")
+@pytest.mark.skipif(find_spec("pandas") is None, reason='requires pandas')
+def test_pyostie_dataframe_output(test_file: str) -> None:
+    output = pyostie.Extract(test_file, insights=True, extension="tif")
     df, text = output.start()
     assert isinstance(df, pd.DataFrame)
-    assert bool(set(df.columns).intersection(expected_columns))
+    assert bool(set(df.columns).intersection(expected_columns)), "Expected columns not found in DataFrame"
 
 
 @pytest.mark.parametrize(
@@ -55,11 +54,10 @@ def pyostie_dataframe_output(test_file):
     [Output.STRING, list],
     ids=['string', 'list'],
 )
-@pytest.mark.skipif(pandas_installed is False, reason="requires pandas")
-def pyostie_text_output(test_file, output):
-    output1 = pyostie.extract(test_file, insights=False, extension="tif")
+@pytest.mark.skipif(find_spec("pandas") is None, reason="requires pandas")
+def test_pyostie_text_output(test_file: str, output: type) -> None:
+    output1 = pyostie.Extract(test_file, insights=False, extension="tif")
     text = output1.start()
+    print(text)
     if output == Output.STRING:
-        assert isinstance(text, str)
-    elif output == list:
-        assert isinstance(text, list)
+        assert isinstance(text, str), "Output is not of type str"

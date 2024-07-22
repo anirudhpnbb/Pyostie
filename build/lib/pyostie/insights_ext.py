@@ -5,63 +5,58 @@ import pandas as pd
 import numpy as np
 from PIL import Image
 
+data = pd.DataFrame()
 
-df = pd.DataFrame()
+class GenerateInsights:
 
-
-class generate_insights:
-
-    def __init__(self, filename, data):
+    def __init__(self, filename: str, data: pd.DataFrame):
         """
+        Initialize the GenerateInsights class.
 
         :param filename: Input the filename as string.
-        :param data: Input an empty dataframe.
+        :param data: Input an empty DataFrame.
         """
         self.file = filename
         self.data = data
 
-    def generate_df(self):
+    def generate_df(self) -> pd.DataFrame:
         """
-        :return:
+        Generate insights and return a DataFrame with text and position data.
+
+        :return: DataFrame with OCR data and image dimensions.
         """
-        top_plus_height = []
-        left_plus_width = []
         img = cv2.imread(self.file)
         image = Image.open(self.file)
         w, h = image.size
+
+        # Extract OCR data
         d = pytesseract.image_to_data(img, output_type=Output.DICT)
-        self.data = self.data.assign(**d)
-        self.data.replace("", np.NaN, inplace=True)
-        self.data.replace(" ", np.NaN, inplace=True)
-        self.data.dropna(subset=["text"], inplace=True)
-        self.data = self.data.reset_index()
-        self.data = self.data.drop(["index", "block_num", "level"], 1)
-        image_width = [w] * len(self.data)
-        image_height = [h] * len(self.data)
-        self.data["conf"] = [i / 100 for i in self.data["conf"]]
-        self.data["image_width"] = image_width
-        self.data["image_height"] = image_height
-        for val in range(len(self.data)):
-            output = self.data["left"][val] + self.data["width"][val]
-            left_plus_width.append(output)
-        for val in range(len(self.data)):
-            output = self.data["top"][val] + self.data["height"][val]
-            top_plus_height.append(output)
-        self.data["top_plus_height"] = top_plus_height
-        self.data["left_plus_width"] = left_plus_width
-        self.data['topLeft'] = tuple(self.data[['left', 'top']].
-                                     apply(lambda x: ','.join(x.fillna('').map(str)), axis=1))
-        self.data['bottomLeft'] = tuple(self.data[['left', 'top_plus_height']].
-                                        apply(lambda x: ','.join(x.fillna('').map(str)), axis=1))
-        self.data['bottomRight'] = tuple(self.data[['left_plus_width', 'top_plus_height']].
-                                         apply(lambda x: ','.join(x.fillna('').map(str)), axis=1))
-        self.data['topRight'] = tuple(self.data[['left_plus_width', 'top']].
-                                      apply(lambda x: ','.join(x.fillna('').map(str)), axis=1))
-        # self.data['topLeft'] = self.data['topLeft'].str.strip(',')
-        # self.data['bottomLeft'] = self.data['bottomLeft'].str.strip(',')
-        # self.data['bottomRight'] = self.data['bottomRight'].str.strip(',')
-        # self.data['topRight'] = self.data['topRight'].str.strip(',')
-        self.data = self.data.drop(["left_plus_width", "top_plus_height"], 1)
+
+        # Update DataFrame with OCR data
+        self.data = self.data.assign(**d).replace(["", " "], np.NaN).dropna(subset=["text"]).reset_index(drop=True)
+        self.data = self.data.drop(columns=["block_num", "level"])
+
+        # Add image dimensions and confidence score
+        self.data["conf"] = self.data["conf"] / 100
+        self.data["image_width"] = w
+        self.data["image_height"] = h
+
+        # Calculate bounding box coordinates
+        self.data["top_plus_height"] = self.data["top"] + self.data["height"]
+        self.data["left_plus_width"] = self.data["left"] + self.data["width"]
+
+        # Generate corner coordinates
+        self.data['topLeft'] = self.data[['left', 'top']].apply(lambda x: f"{x[0]},{x[1]}", axis=1)
+        self.data['bottomLeft'] = self.data[['left', 'top_plus_height']].apply(lambda x: f"{x[0]},{x[1]}", axis=1)
+        self.data['bottomRight'] = self.data[['left_plus_width', 'top_plus_height']].apply(lambda x: f"{x[0]},{x[1]}", axis=1)
+        self.data['topRight'] = self.data[['left_plus_width', 'top']].apply(lambda x: f"{x[0]},{x[1]}", axis=1)
+
+        # Drop intermediate calculation columns
+        self.data = self.data.drop(columns=["left_plus_width", "top_plus_height"])
 
         return self.data
 
+# Example usage:
+# df = pd.DataFrame()
+# insights = GenerateInsights("example_image.png", df)
+# df = insights.generate_df()
