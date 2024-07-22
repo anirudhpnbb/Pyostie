@@ -125,8 +125,4 @@ Anirudh Palaparthi - [@anirudh8889](https://twitter.com/anirudh8889) - [pnbbanir
 
 Balaram Guddanti - [Balaram Guddanti](https://www.linkedin.com//in/balaram-guddanti) - balaram.guddanti6@gmail.com 
 
-Prithviraj Decca - [Prithviraj Decca](https://www.linkedin.com//in/prithvirajdecca) - prithvirajdecca@gmail.com 
-
-Peram Srujan Kumar - [Peram Srujan Kumar](https://www.linkedin.com/in/srujanperam/) - peramsrujan@gmail.com 
-
 Project Link: [PYOSTIE](https://github.com/anirudhpnbb/Pyostie)
