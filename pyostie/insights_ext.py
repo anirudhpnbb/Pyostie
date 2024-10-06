@@ -25,7 +25,7 @@ class GenerateInsights:
 
         :return: DataFrame with OCR data and image dimensions.
         """
-        img = cv2.imread(self.file)
+        img = cv2.imread(self.file) # Self.file is the image file that you want to process
         image = Image.open(self.file)
         w, h = image.size
 
